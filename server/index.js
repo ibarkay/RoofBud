@@ -57,6 +57,19 @@ app.post("/api/users", async (req, res) => {
 		res.status(500).send(e.message);
 	}
 });
+// ?delete a user
+app.delete("/api/users/:username", async (req, res) => {
+	try {
+		User.deleteOne({ userName: req.params.username }, function (err) {
+			if (err) console.log(err);
+			res.send("deleted.");
+		});
+	} catch (e) {
+		res.status(500).send(e.message);
+	}
+});
+// ?edit a user
+app.patch("/api/users/:username", async (req, res) => {});
 
 // --------listener--------------
 app.listen(1337, () => {
