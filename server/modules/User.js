@@ -43,6 +43,9 @@ const userSchema = new mongoose.Schema({
 			},
 		},
 	],
+	avatar: {
+		type: Buffer,
+	},
 });
 // -------methods------------
 userSchema.pre("save", async function (next) {
@@ -85,6 +88,8 @@ userSchema.methods.toJSON = function () {
 	const userObject = user.toObject();
 	delete userObject.password;
 	delete userObject.tokens;
+	delete userObject.avatar;
+
 	return userObject;
 };
 // ----------------------------------------------

@@ -3,13 +3,68 @@ const app = express();
 require("../server/modules/mongoose");
 const cors = require("cors");
 const auth = require("./middleware/auth");
+const multer = require("multer");
+const sharp = require("sharp");
+// -----file upload settings-----
+const upload = multer({
+	limits: {
+		fileSize: 1000000,
+	},
+	fileFilter(req, file, cb) {
+		if (!file.originalname.match(/\.(jpg|JPG|png|PNG)$/)) {
+			return cb(new Error("please jpg"));
+		}
+		cb(undefined, true);
+	},
+});
+// ------------------------------
 
 app.use(cors());
 app.use(express.json());
 // ----------import modules----------------
 const User = require("./modules/User");
 // ----------------------------------------
+// ?upload picture
+app.post(
+	"/api/users/me/avatar",
+	auth, //*first middleware is AUTH
+	upload.single("avatar"), //*only then upload middleware
+	async (req, res) => {
+		const buffer = await sharp(req.file.buffer) //sharp-resize the img
+			.resize({ width: 200, height: 200 })
+			.png()
+			.toBuffer();
 
+		req.user.avatar = buffer;
+		await req.user.save();
+		res.send();
+	},
+	//*error handling
+	(error, req, res, next) => {
+		res.status(400).send({ error: error.message });
+	}
+);
+// ?delete user picture
+app.delete("/api/users/me/avatar", auth, async (req, res) => {
+	req.user.avatar = undefined;
+	await req.user.save();
+	res.send("image was deleted");
+});
+// ?get user picture
+app.get("/api/users/:username/avatar", async (req, res) => {
+	try {
+		const user = await User.findOne({ userName: req.params.username });
+		if (!user || !user.avatar) {
+			throw new Error();
+		}
+		res.set("Content-Type", "image/png");
+		res.send(user.avatar);
+	} catch (e) {
+		res.status(404).send();
+	}
+});
+
+//
 // ?get users
 app.get("/api/users", auth, async (req, res) => {
 	try {
@@ -99,7 +154,7 @@ app.post("/api/logout", auth, async (req, res) => {
 		await req.user.save();
 		res.send("logged-off .");
 	} catch (e) {
-		res.status(500).send();
+		res.status(500).send("ho");
 	}
 });
 
