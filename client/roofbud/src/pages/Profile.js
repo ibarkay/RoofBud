@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Cookies from "universal-cookie";
 
-const Sign = () => {
+const Profile = () => {
 	const url = "http://localhost:1337";
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
@@ -12,7 +12,7 @@ const Sign = () => {
 	const [toDate, setToDate] = useState("");
 	const [status, setStatus] = useState("");
 
-	const handleSignIn = async () => {
+	const handleProfileIn = async () => {
 		const cookie = new Cookies();
 		const resp = await axios
 			.post(url + "/api/users", {
@@ -34,16 +34,7 @@ const Sign = () => {
 	};
 	return (
 		<div>
-			<img src="http://localhost:1337/api/users/gali/avatar" alt="" />
-			<h1>Sign-in</h1>
-			<label htmlFor="username">user name</label>
-			<br />
-			<input
-				onChange={(e) => setUsername(e.target.value)}
-				type="text"
-				name=""
-				id="username"
-			/>
+			<h1>Edit Profile</h1>
 			<br />
 			<label htmlFor="password">Password</label>
 			<br />
@@ -52,6 +43,15 @@ const Sign = () => {
 				type="password"
 				name=""
 				id="password"
+			/>
+			<br />
+			<label htmlFor="password2">re-Type Password</label>
+			<br />
+			<input
+				onChange={(e) => setPassword(e.target.value)}
+				type="password"
+				name=""
+				id="password2"
 			/>
 			<br />
 			<label htmlFor="name">name</label>
@@ -90,10 +90,10 @@ const Sign = () => {
 				id=""
 			/>
 			<br />
-			<button onClick={() => handleSignIn()}>Sign In</button>
+			<button onClick={() => handleProfileIn()}>Profile In</button>
 			<p>{status}</p>
 		</div>
 	);
 };
 
-export default Sign;
+export default Profile;
