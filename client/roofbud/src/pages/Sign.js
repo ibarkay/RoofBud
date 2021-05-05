@@ -11,7 +11,8 @@ const Sign = () => {
 	const [fromDate, setFromDate] = useState("");
 	const [toDate, setToDate] = useState("");
 	const [status, setStatus] = useState("");
-
+	const [fileToUpload, setFileToUpload] = useState({});
+	// ---------------------------------------------------
 	const handleSignIn = async () => {
 		const cookie = new Cookies();
 		const resp = await axios
@@ -28,13 +29,31 @@ const Sign = () => {
 				setStatus("OK , user has been created.");
 			})
 			.catch((e) => {
-				// console.dir(e);
 				setStatus(e.response.data);
 			});
+		if (fileToUpload) {
+			const fd = new FormData();
+			fd.append("avatar", fileToUpload, fileToUpload.name);
+			axios
+				.post(url + "/api/users/me/avatar", fd, {
+					headers: { Authorization: cookie.get("token") },
+				})
+				.then((res) => {
+					console.log(res);
+				})
+				.catch((e) => {
+					console.log(e);
+				});
+		}
 	};
+
+	const handleSelectFile = async (e) => {
+		setFileToUpload(e.target.files[0]);
+	};
+	const handleUpload = () => {};
+	// -------------------jsx--------------------
 	return (
 		<div>
-			<img src="http://localhost:1337/api/users/gali/avatar" alt="" />
 			<h1>Sign-in</h1>
 			<label htmlFor="username">user name</label>
 			<br />
@@ -43,6 +62,15 @@ const Sign = () => {
 				type="text"
 				name=""
 				id="username"
+			/>
+			<br />
+			<label htmlFor="avatar">upload avatar</label>
+			<br />
+			<input
+				type="file"
+				onChange={(e) => handleSelectFile(e)}
+				name="avatar"
+				id="avatar"
 			/>
 			<br />
 			<label htmlFor="password">Password</label>
