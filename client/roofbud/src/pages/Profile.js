@@ -16,13 +16,33 @@ const Profile = () => {
 			})
 			.catch((e) => {});
 	}, []);
-
-	return (
-		<div>
-			<img src={`${url}/api/users/${user.userName}/avatar`} alt="" />
-			<h1>{user.userName}</h1>
-		</div>
-	);
+	if (user.userName) {
+		return (
+			<div>
+				<div className="ui card">
+					<div className="image">
+						<img src={`${url}/api/users/${user.userName}/avatar`} alt="" />
+					</div>
+					<div className="content">
+						<a className="header">{user.userName}</a>
+						<div className="meta">
+							<span className="date">Joined in 2021</span>
+						</div>
+						<div className="description">
+							{user.userName} is an art director living in New York.
+						</div>
+					</div>
+					<div className="extra content">
+						<a>
+							<i className="user icon"></i>
+							22 Friends
+						</a>
+					</div>
+				</div>
+			</div>
+		);
+	}
+	return <h1>no User, no soup.</h1>;
 };
 
 export default Profile;
