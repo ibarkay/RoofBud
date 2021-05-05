@@ -83,6 +83,15 @@ app.get("/api/users/:username", auth, async (req, res) => {
 		res.status(500).send(e.message);
 	}
 });
+// ?get user2
+app.get("/api/m3", auth, async (req, res) => {
+	try {
+		const user = await User.findOne({ userName: req.user.userName });
+		res.send(user);
+	} catch (e) {
+		res.status(500).send(e.message);
+	}
+});
 
 // ?match dates
 app.post("/api/users/date", auth, async (req, res) => {
