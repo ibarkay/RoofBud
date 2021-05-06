@@ -11,6 +11,7 @@ const Sign = () => {
 	const [fromDate, setFromDate] = useState("");
 	const [toDate, setToDate] = useState("");
 	const [status, setStatus] = useState("");
+	const [gender, setGender] = useState();
 	const [fileToUpload, setFileToUpload] = useState({});
 	// ---------------------------------------------------
 	const handleSignIn = async () => {
@@ -20,6 +21,7 @@ const Sign = () => {
 				userName: username,
 				password: password,
 				name: name,
+				gender: gender,
 				age: age,
 				fromDate: fromDate,
 				toDate: toDate,
@@ -89,6 +91,23 @@ const Sign = () => {
 				type="text"
 				name=""
 				id="name"
+			/>
+			<br />
+			<label htmlFor="male">Male</label>
+			<input
+				onChange={(e) => setGender(e.target.value)}
+				type="radio"
+				name="gender"
+				id="male"
+				value={true}
+			/>
+			<label htmlFor="female">female</label>
+			<input
+				onChange={(e) => setGender(e.target.value)}
+				type="radio"
+				name="gender"
+				id="female"
+				value={false}
 			/>
 			<br />
 			<label htmlFor="age">age</label>
