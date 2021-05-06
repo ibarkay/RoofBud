@@ -99,7 +99,9 @@ app.post("/api/users/date", auth, async (req, res) => {
 		const matches = await User.find({
 			toDate: {
 				$lte: Date.parse(new Date(req.body.toDate)),
-				$gte: Date.parse(new Date(req.body.fromDate)),
+			},
+			fromDate: {
+				$lte: Date.parse(new Date(req.body.toDate)),
 			},
 		});
 		res.send(matches);
