@@ -46,6 +46,10 @@ const userSchema = new mongoose.Schema({
 	avatar: {
 		type: Buffer,
 	},
+	gender: {
+		type: Boolean,
+		require: true,
+	},
 });
 // -------methods------------
 userSchema.pre("save", async function (next) {

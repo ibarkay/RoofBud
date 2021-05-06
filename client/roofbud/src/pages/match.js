@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Cookies from "universal-cookie";
 import { useHistory } from "react-router-dom";
+import Card from "../components/Crad";
 const url = "http://localhost:1337";
 
 const Match = () => {
@@ -10,6 +11,7 @@ const Match = () => {
 	const [toDate, setToDate] = useState();
 	const [matches, setMatches] = useState([]);
 	const history = useHistory();
+	console.log(history);
 
 	// -----------------------------------
 	const cookie = new Cookies();
@@ -74,7 +76,7 @@ const Match = () => {
 			{matches.length > 0
 				? matches.map((m) => {
 						if (m.userName !== user.userName) {
-							return <h1>{m.userName}</h1>;
+							return <Card prop={m} />;
 						}
 				  })
 				: null}
