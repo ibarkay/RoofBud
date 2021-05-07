@@ -5,6 +5,7 @@ const cors = require("cors");
 const auth = require("./middleware/auth");
 const multer = require("multer");
 const sharp = require("sharp");
+app.use(express.static("public"));
 // -----file upload settings-----
 const upload = multer({
 	limits: {
