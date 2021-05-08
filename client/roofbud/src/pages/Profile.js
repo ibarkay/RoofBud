@@ -2,13 +2,19 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Cookies from "universal-cookie";
 const cookie = new Cookies();
+let uri = "";
+if (process.env.NODE_ENV === "production") {
+	uri = process.env.PUBLIC_URL;
+} else {
+	uri = "http://localhost:1337";
+}
 
 const Profile = () => {
-	const url = "http://localhost:1337";
+	
 	const [user, setUser] = useState({});
 	useEffect(() => {
 		axios
-			.get(url + "/api/m3", {
+			.get(uri + "/api/m3", {
 				headers: { Authorization: cookie.get("token") },
 			})
 			.then((res) => {
@@ -21,7 +27,7 @@ const Profile = () => {
 			<div>
 				<div className="ui card">
 					<div className="image">
-						<img src={`${url}/api/users/${user.userName}/avatar`} alt="" />
+						<img src={`${uri}/api/users/${user.userName}/avatar`} alt="" />
 					</div>
 					<div className="content">
 						<a className="header">{user.userName}</a>

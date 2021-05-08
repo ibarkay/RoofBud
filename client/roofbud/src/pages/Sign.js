@@ -1,9 +1,14 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Cookies from "universal-cookie";
+let uri = "";
+if (process.env.NODE_ENV === "production") {
+	uri = process.env.PUBLIC_URL;
+} else {
+	uri = "http://localhost:1337";
+}
 
 const Sign = () => {
-	const url = "http://localhost:1337";
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
 	const [name, setName] = useState("");
@@ -17,7 +22,7 @@ const Sign = () => {
 	const handleSignIn = async () => {
 		const cookie = new Cookies();
 		const resp = await axios
-			.post(url + "/api/users", {
+			.post(uri + "/api/users", {
 				userName: username,
 				password: password,
 				name: name,
@@ -37,7 +42,7 @@ const Sign = () => {
 			const fd = new FormData();
 			fd.append("avatar", fileToUpload, fileToUpload.name);
 			axios
-				.post(url + "/api/users/me/avatar", fd, {
+				.post(uri + "/api/users/me/avatar", fd, {
 					headers: { Authorization: cookie.get("token") },
 				})
 				.then((res) => {

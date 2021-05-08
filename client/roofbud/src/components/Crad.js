@@ -1,5 +1,10 @@
 import React, { Component } from "react";
-const url = "http://localhost:1337";
+let uri = "";
+if (process.env.NODE_ENV === "production") {
+	uri = process.env.PUBLIC_URL;
+} else {
+	uri = "http://localhost:1337";
+}
 
 export default class Crad extends Component {
 	render() {
@@ -11,12 +16,12 @@ export default class Crad extends Component {
 						<div class="right floated meta">14h</div>
 						<img
 							class="ui avatar image"
-							src={`${url}/api/users/${user.userName}/avatar`}
+							src={`${uri}/api/users/${user.userName}/avatar`}
 						/>{" "}
 						{this.props.prop.userName}
 					</div>
 					<div class="image">
-						<img src={`${url}/api/users/${user.userName}/avatar`} />
+						<img src={`${uri}/api/users/${user.userName}/avatar`} />
 					</div>
 					<div class="content">
 						<span class="right floated">
@@ -36,5 +41,3 @@ export default class Crad extends Component {
 		);
 	}
 }
-
-// /<div>{this.props.prop}</div>

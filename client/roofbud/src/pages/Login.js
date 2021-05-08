@@ -4,7 +4,15 @@ import Cookies from "universal-cookie";
 
 const Login = () => {
 	const cookie = new Cookies();
-	const uri = "http://localhost:1337";
+	console.log(process.env.PUBLIC_URL);
+
+	let uri = "";
+	if (process.env.NODE_ENV === "production") {
+		uri = process.env.PUBLIC_URL;
+	} else {
+		uri = "http://localhost:1337";
+	}
+
 	// ---------states----------------------
 	const [usernameInput, setUsernameInput] = useState("");
 	const [passwordInput, setPasswordInput] = useState("");
@@ -13,7 +21,7 @@ const Login = () => {
 
 	const handleLogin = async () => {
 		const resp = await axios
-			.post("http://localhost:1337/api/login", {
+			.post(uri + "/api/login", {
 				userName: usernameInput,
 				password: passwordInput,
 			})

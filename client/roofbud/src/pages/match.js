@@ -3,7 +3,12 @@ import axios from "axios";
 import Cookies from "universal-cookie";
 import { useHistory } from "react-router-dom";
 import Card from "../components/Crad";
-const url = "http://localhost:1337";
+let uri = "";
+if (process.env.NODE_ENV === "production") {
+	uri = process.env.PUBLIC_URL;
+} else {
+	uri = "http://localhost:1337";
+}
 
 const Match = () => {
 	const [user, setUser] = useState();
@@ -24,7 +29,7 @@ const Match = () => {
 	const handleMatch = async () => {
 		// handleClick();
 		const resp = await axios.post(
-			url + "/api/users/date",
+			uri + "/api/users/date",
 			{ toDate: toDate, fromDate: fromDate },
 			{
 				headers: { Authorization: cookie.get("token") },
@@ -36,7 +41,7 @@ const Match = () => {
 	// ------------------------------------------
 	useEffect(() => {
 		axios
-			.get(url + "/api/m3", {
+			.get(uri + "/api/m3", {
 				headers: { Authorization: cookie.get("token") },
 			})
 			.then((res) => {

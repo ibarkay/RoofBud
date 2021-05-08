@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-require("../server/modules/mongoose");
+require("./modules/mongoose");
 const cors = require("cors");
 const auth = require("./middleware/auth");
 const multer = require("multer");
@@ -171,6 +171,6 @@ app.post("/api/logout", auth, async (req, res) => {
 });
 
 // --------listener--------------
-app.listen(1337, () => {
+app.listen(process.env.PORT || 1337, () => {
 	console.log("running on 1337");
 });
