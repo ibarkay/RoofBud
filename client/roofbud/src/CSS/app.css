@@ -5,3 +5,47 @@
 	--orange-dark: #f7953c;
 	--yellow: #fff101;
 }
+li {
+	list-style-type: none;
+}
+a {
+	color: var(--white);
+}
+body {
+	height: 100vh;
+	margin: 0;
+	padding: 0;
+	background: url("../statics/shutterstock_463528040-scaled.jpg") no-repeat
+		center/cover;
+}
+.header {
+	color: var(--white);
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+}
+.home-container {
+	height: 80vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	text-align: center;
+	align-items: center;
+}
+.home-container a {
+	padding: 10px;
+	border-radius: 20%;
+	background: var(--orange);
+	text-decoration: none;
+	opacity: 40%;
+}
+
+.home-container a:hover {
+	color: var(--white);
+	background-color: var(--orange-dark);
+	opacity: 70%;
+}
+.home-container h1 {
+	font-size: 2.5rem;
+	color: var(--white);
+}
