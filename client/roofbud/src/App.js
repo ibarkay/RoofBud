@@ -13,7 +13,7 @@ const App = () => {
 			<div>
 				<ul className="header">
 					<li>
-						<a href="/#/home">Logo</a>
+						<a href="/#/">Logo</a>
 					</li>
 					<li>
 						<a href="/#/login">login</a>
@@ -33,7 +33,7 @@ const App = () => {
 					<Route path="/sign" exact component={Sign} />
 					<Route path="/profile" exact component={Profile} />
 					<Route path="/match" exact component={Match} />
-					<Route path="/home" exact component={Home} />
+					<Route path="/" exact component={Home} />
 				</div>
 			</div>
 		</HashRouter>

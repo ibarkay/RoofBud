@@ -60,90 +60,94 @@ const Sign = () => {
 	const handleUpload = () => {};
 	// -------------------jsx--------------------
 	return (
-		<div>
-			<h1>Sign-in</h1>
-			<label htmlFor="username">user name</label>
-			<br />
-			<input
-				onChange={(e) => setUsername(e.target.value)}
-				type="text"
-				name=""
-				id="username"
-			/>
-			<br />
-			<label htmlFor="avatar">upload avatar</label>
-			<br />
-			<input
-				type="file"
-				onChange={(e) => handleSelectFile(e)}
-				name="avatar"
-				id="avatar"
-			/>
-			<br />
-			<label htmlFor="password">Password</label>
-			<br />
-			<input
-				onChange={(e) => setPassword(e.target.value)}
-				type="password"
-				name=""
-				id="password"
-			/>
-			<br />
-			<label htmlFor="name">name</label>
-			<br />
-			<input
-				onChange={(e) => setName(e.target.value)}
-				type="text"
-				name=""
-				id="name"
-			/>
-			<br />
-			<label htmlFor="male">Male</label>
-			<input
-				onChange={(e) => setGender(e.target.value)}
-				type="radio"
-				name="gender"
-				id="male"
-				value={true}
-			/>
-			<label htmlFor="female">female</label>
-			<input
-				onChange={(e) => setGender(e.target.value)}
-				type="radio"
-				name="gender"
-				id="female"
-				value={false}
-			/>
-			<br />
-			<label htmlFor="age">age</label>
-			<br />
-			<input
-				onChange={(e) => setAge(e.target.value)}
-				type="number"
-				name=""
-				id="age"
-			/>
-			<br />
-			<label htmlFor="fromDate">from date</label>
-			<br />
-			<input
-				onChange={(e) => setFromDate(e.target.value)}
-				type="date"
-				name=""
-				id="fromDate"
-			/>
-			<br />
-			<label htmlFor="toDate">to Date</label>
-			<br />
-			<input
-				onChange={(e) => setToDate(e.target.value)}
-				type="date"
-				name="toDate"
-				id=""
-			/>
-			<br />
-			<button onClick={() => handleSignIn()}>Sign In</button>
-			<p>{status}</p>
+		<div className="fsize">
+			<div className="back-bg">
+				<div className="holder">
+					<h1>Sign-in</h1>
+					<label htmlFor="username">user name</label>
+
+					<input
+						onChange={(e) => setUsername(e.target.value)}
+						type="text"
+						name=""
+						id="username"
+					/>
+
+					<label htmlFor="avatar">upload avatar</label>
+
+					<input
+						type="file"
+						onChange={(e) => handleSelectFile(e)}
+						name="avatar"
+						id="avatar"
+					/>
+
+					<label htmlFor="password">Password</label>
+
+					<input
+						onChange={(e) => setPassword(e.target.value)}
+						type="password"
+						name=""
+						id="password"
+					/>
+
+					<label htmlFor="name">name</label>
+
+					<input
+						onChange={(e) => setName(e.target.value)}
+						type="text"
+						name=""
+						id="name"
+					/>
+
+					<label htmlFor="male">Male</label>
+					<input
+						onChange={(e) => setGender(e.target.value)}
+						type="radio"
+						name="gender"
+						id="male"
+						value={true}
+					/>
+					<label htmlFor="female">female</label>
+					<input
+						onChange={(e) => setGender(e.target.value)}
+						type="radio"
+						name="gender"
+						id="female"
+						value={false}
+					/>
+
+					<label htmlFor="age">age</label>
+
+					<input
+						onChange={(e) => setAge(e.target.value)}
+						type="number"
+						name=""
+						id="age"
+					/>
+
+					<label htmlFor="fromDate">from date</label>
+
+					<input
+						onChange={(e) => setFromDate(e.target.value)}
+						type="date"
+						name=""
+						id="fromDate"
+					/>
+
+					<label htmlFor="toDate">to Date</label>
+
+					<input
+						onChange={(e) => setToDate(e.target.value)}
+						type="date"
+						name="toDate"
+						id=""
+					/>
+
+					<button onClick={() => handleSignIn()}>Sign In</button>
+					<p>{status}</p>
+				</div>
+			</div>
 		</div>
 	);
 };
