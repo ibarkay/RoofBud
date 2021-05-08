@@ -34,10 +34,6 @@ Have 3 categories of features you want to implement.
    do you need?
    [] users
 
-### API Endpoint planning
+### Links
 
-Plan your end points. Do you need full CRUD endpoints to
-each model? Are you going to handle query parameters
-with your API? If you have authentication, do some of the
-endpoints need to be protected?
-Test all your end points on with Postman.
+[Link to RoofBud web-app](https://r00fbud.herokuapp.com/)
