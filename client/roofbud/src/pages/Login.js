@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Cookies from "universal-cookie";
+import { BrowserRouter, Route, HashRouter, Router } from "react-router-dom";
+import history from "../conf/creatHistory";
 
-const Login = () => {
+const Login = ({ test }) => {
 	const cookie = new Cookies();
-	console.log(process.env.PUBLIC_URL);
-
 	let uri = "";
 	if (process.env.NODE_ENV === "production") {
 		uri = process.env.PUBLIC_URL;
@@ -28,6 +28,8 @@ const Login = () => {
 			.then((res) => {
 				cookie.set("token", res.data.token, { path: "/" });
 				setStatus("i know you !, token saved, cookie has been baked");
+				test();
+				history.push("/profile");
 			})
 			.catch((e) => {
 				setStatus("no soup for you!");
@@ -89,11 +91,10 @@ const Login = () => {
 				Login
 			</button>
 
-			<button className="ui yellow button">sign-in</button>
 			<br />
-			<button onClick={() => handleTest()}>TestCookie</button>
+			{/* <button onClick={() => handleTest()}>TestCookie</button> */}
 			<br />
-			<button onClick={() => handleLogout()}>Logout</button>
+
 			<br />
 			<h1>{status}</h1>
 		</div>

@@ -1,4 +1,11 @@
-import { BrowserRouter, Route, HashRouter, Router } from "react-router-dom";
+import { Route, HashRouter } from "react-router-dom";
+import Header from "./pages/Header";
+import history from "../src/conf/creatHistory"; //!importent without it - i cant use history and hashrouter.
+import axios from "axios";
+import Cookies from "universal-cookie";
+import { useState, useEffect } from "react";
+
+// ------------------------------------
 
 import Login from "./pages/Login";
 import Sign from "./pages/Sign";
@@ -6,30 +13,44 @@ import Profile from "./pages/Profile";
 import Match from "./pages/match";
 import Home from "./pages/Home";
 import "./CSS/app.css";
+const cookie = new Cookies();
+let uri = "";
+if (process.env.NODE_ENV === "production") {
+	uri = process.env.PUBLIC_URL;
+} else {
+	uri = "http://localhost:1337";
+}
+// ---------------------------------
 
 const App = () => {
+	const [isLogged, setIsLogged] = useState(false);
+
+	const test = () => {
+		setIsLogged(!isLogged);
+	};
+
+	// !----useEff--------
+	useEffect(() => {
+		console.log(isLogged);
+		axios
+			.get(uri + "/api/m3", {
+				headers: { Authorization: cookie.get("token") },
+			})
+			.then((res) => {
+				setIsLogged(true);
+			})
+			.catch((e) => {
+				console.log(e.message);
+			});
+	}, []);
+	// !------------------------------
+
 	return (
-		<HashRouter>
+		<HashRouter basename="/" history={history}>
 			<div>
-				<ul className="header">
-					<li>
-						<a href="/#/">Logo</a>
-					</li>
-					<li>
-						<a href="/#/login">login</a>
-					</li>
-					{/* <li>
-						<a href="/#/sign">sign</a>
-					</li> */}
-					{/* <li>
-						<a href="/#/profile">profile</a>
-					</li> */}
-					{/* <li>
-						<a href="/#/match">match</a>
-					</li> */}
-				</ul>
+				<Header test={test} isLogged={isLogged} />
 				<div className="content">
-					  <Route path="/login" exact component={Login} />
+					<Route path="/login" exact component={() => <Login test={test} />} />
 					<Route path="/sign" exact component={Sign} />
 					<Route path="/profile" exact component={Profile} />
 					<Route path="/match" exact component={Match} />
@@ -39,19 +60,5 @@ const App = () => {
 		</HashRouter>
 	);
 };
-
-// const App = () => {
-// 	return (
-// 		<div>
-// 			<BrowserRouter>
-// 				<Header />
-// 				<Route path="/login" exact component={Login} />
-// 				<Route path="/sign" exact component={Sign} />
-// 				<Route path="/profile" exact component={Profile} />
-// 				<Route path="/match" exact component={Match} />
-// 			</BrowserRouter>
-// 		</div>
-// 	);
-// };
 
 export default App;

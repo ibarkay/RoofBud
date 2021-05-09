@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Redirect } from "react-router-dom";
 import axios from "axios";
 import Cookies from "universal-cookie";
 const cookie = new Cookies();
@@ -10,8 +11,8 @@ if (process.env.NODE_ENV === "production") {
 }
 
 const Profile = () => {
-	
 	const [user, setUser] = useState({});
+
 	useEffect(() => {
 		axios
 			.get(uri + "/api/m3", {
@@ -41,14 +42,14 @@ const Profile = () => {
 					<div className="extra content">
 						<a>
 							<i className="user icon"></i>
-							22 Friends
+							{/* 22 Friends */}
 						</a>
 					</div>
 				</div>
 			</div>
 		);
 	}
-	return <h1>no User, no soup.</h1>;
+	return <div>not logged in</div>;
 };
 
 export default Profile;
