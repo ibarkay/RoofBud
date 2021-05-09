@@ -66,7 +66,7 @@ const Login = ({ test }) => {
 	// --------------------JSX--------------
 	return (
 		<div className="ui  center aligned container">
-			<label htmlFor="username">User-name</label>
+			<label htmlFor="username">:שם משתמש</label>
 			<br />
 			<input
 				onChange={(e) => setUsernameInput(e.target.value)}
@@ -76,7 +76,7 @@ const Login = ({ test }) => {
 			/>
 
 			<br />
-			<label htmlFor="password">Password</label>
+			<label htmlFor="password">:ססמא</label>
 			<br />
 			<input
 				onChange={(e) => {
@@ -88,7 +88,7 @@ const Login = ({ test }) => {
 			/>
 			<br />
 			<button className="ui pink button" onClick={() => handleLogin()}>
-				Login
+				התחבר
 			</button>
 
 			<br />

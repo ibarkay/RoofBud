@@ -35,7 +35,7 @@ const Header = ({ test, isLogged }) => {
 						<a href="/#/">Logo</a>
 					</li>
 					<li>
-						<a href="/#/login">login</a>
+						<a href="/#/login">כניסה</a>
 					</li>
 				</ul>
 			</div>
@@ -49,13 +49,13 @@ const Header = ({ test, isLogged }) => {
 					</li>
 
 					<li>
-						<a href="/#/profile">profile</a>
+						<a href="/#/profile">אני</a>
 					</li>
 					<li>
-						<a href="/#/match">match</a>
+						<a href="/#/match">מצא לי חבר לגג</a>
 					</li>
 					<li>
-						<button onClick={() => handleLogout()}>log-out</button>
+						<button onClick={() => handleLogout()}>התנתק</button>
 					</li>
 				</ul>
 			</div>

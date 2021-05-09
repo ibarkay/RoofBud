@@ -63,8 +63,8 @@ const Sign = () => {
 		<div className="fsize">
 			<div className="back-bg">
 				<div className="holder">
-					<h1>Sign-in</h1>
-					<label htmlFor="username">user name</label>
+					<h1>הרשמה</h1>
+					<label htmlFor="username">שם משתמש</label>
 
 					<input
 						onChange={(e) => setUsername(e.target.value)}
@@ -73,16 +73,18 @@ const Sign = () => {
 						id="username"
 					/>
 
-					<label htmlFor="avatar">upload avatar</label>
+					{/* <input type="file" onChange={(e) => handleSelectFile(e)} /> */}
+					<label class="custom-file-upload">
+						<input
+							type="file"
+							onChange={(e) => handleSelectFile(e)}
+							name="avatar"
+							id="avatar"
+						/>
+						העלה תמונה
+					</label>
 
-					<input
-						type="file"
-						onChange={(e) => handleSelectFile(e)}
-						name="avatar"
-						id="avatar"
-					/>
-
-					<label htmlFor="password">Password</label>
+					<label htmlFor="password">ססמא</label>
 
 					<input
 						onChange={(e) => setPassword(e.target.value)}
@@ -91,7 +93,7 @@ const Sign = () => {
 						id="password"
 					/>
 
-					<label htmlFor="name">name</label>
+					<label htmlFor="name">שם מלא</label>
 
 					<input
 						onChange={(e) => setName(e.target.value)}
@@ -100,7 +102,7 @@ const Sign = () => {
 						id="name"
 					/>
 
-					<label htmlFor="male">Male</label>
+					<label htmlFor="male">זכר</label>
 					<input
 						onChange={(e) => setGender(e.target.value)}
 						type="radio"
@@ -108,7 +110,7 @@ const Sign = () => {
 						id="male"
 						value={true}
 					/>
-					<label htmlFor="female">female</label>
+					<label htmlFor="female">נקבה</label>
 					<input
 						onChange={(e) => setGender(e.target.value)}
 						type="radio"
@@ -117,7 +119,7 @@ const Sign = () => {
 						value={false}
 					/>
 
-					<label htmlFor="age">age</label>
+					<label htmlFor="age">גיל</label>
 
 					<input
 						onChange={(e) => setAge(e.target.value)}
@@ -126,7 +128,7 @@ const Sign = () => {
 						id="age"
 					/>
 
-					<label htmlFor="fromDate">from date</label>
+					<label htmlFor="fromDate">:מתאריך</label>
 
 					<input
 						onChange={(e) => setFromDate(e.target.value)}
@@ -135,7 +137,7 @@ const Sign = () => {
 						id="fromDate"
 					/>
 
-					<label htmlFor="toDate">to Date</label>
+					<label htmlFor="toDate">:עד תאריך</label>
 
 					<input
 						onChange={(e) => setToDate(e.target.value)}
@@ -144,7 +146,7 @@ const Sign = () => {
 						id=""
 					/>
 
-					<button onClick={() => handleSignIn()}>Sign In</button>
+					<button onClick={() => handleSignIn()}>צור חשבון ומצא לי שותף</button>
 					<p>{status}</p>
 				</div>
 			</div>
