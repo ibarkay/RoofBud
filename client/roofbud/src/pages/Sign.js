@@ -16,6 +16,7 @@ const Sign = () => {
 	const [fromDate, setFromDate] = useState("");
 	const [toDate, setToDate] = useState("");
 	const [status, setStatus] = useState("");
+	const [moreText, setMoreText] = useState("");
 	const [gender, setGender] = useState();
 	const [fileToUpload, setFileToUpload] = useState({});
 	// ---------------------------------------------------
@@ -28,6 +29,7 @@ const Sign = () => {
 				name: name,
 				gender: gender,
 				age: age,
+				moreText: moreText,
 				fromDate: fromDate,
 				toDate: toDate,
 			})
@@ -74,7 +76,7 @@ const Sign = () => {
 					/>
 
 					{/* <input type="file" onChange={(e) => handleSelectFile(e)} /> */}
-					<label class="custom-file-upload">
+					<label className="custom-file-upload">
 						<input
 							type="file"
 							onChange={(e) => handleSelectFile(e)}
@@ -127,8 +129,23 @@ const Sign = () => {
 						name=""
 						id="age"
 					/>
+					<label htmlFor="moreText">כמה מילים על עצמי</label>
+					<textarea
+						onChange={(e) => setMoreText(e.target.value)}
+						name=""
+						id=""
+						cols="30"
+						rows="3"
+					></textarea>
 
-					<label htmlFor="fromDate">:מתאריך</label>
+					<label
+						onChange={(e) => {
+							setMoreText(e.target.value);
+						}}
+						htmlFor="fromDate"
+					>
+						:מתאריך
+					</label>
 
 					<input
 						onChange={(e) => setFromDate(e.target.value)}

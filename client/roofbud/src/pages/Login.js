@@ -6,6 +6,7 @@ import history from "../conf/creatHistory";
 
 const Login = ({ test }) => {
 	const cookie = new Cookies();
+	// -----------url config-----------
 	let uri = "";
 	if (process.env.NODE_ENV === "production") {
 		uri = process.env.PUBLIC_URL;
@@ -65,38 +66,42 @@ const Login = ({ test }) => {
 
 	// --------------------JSX--------------
 	return (
-		<div className="ui  center aligned container">
-			<label htmlFor="username">:שם משתמש</label>
-			<br />
-			<input
-				onChange={(e) => setUsernameInput(e.target.value)}
-				type="text"
-				name=""
-				id="username"
-			/>
+		<div className="iftach-container">
+			<div className="ui  center aligned container">
+				<div className="iftach-container">
+					<label htmlFor="username">:שם משתמש</label>
+					<br />
+					<input
+						onChange={(e) => setUsernameInput(e.target.value)}
+						type="text"
+						name=""
+						id="username"
+					/>
 
-			<br />
-			<label htmlFor="password">:ססמא</label>
-			<br />
-			<input
-				onChange={(e) => {
-					setPasswordInput(e.target.value);
-				}}
-				type="password"
-				name=""
-				id="password"
-			/>
-			<br />
-			<button className="ui pink button" onClick={() => handleLogin()}>
-				התחבר
-			</button>
+					<br />
+					<label htmlFor="password">:ססמא</label>
+					<br />
+					<input
+						onChange={(e) => {
+							setPasswordInput(e.target.value);
+						}}
+						type="password"
+						name=""
+						id="password"
+					/>
+					<br />
+					<button className="btnLog" onClick={() => handleLogin()}>
+						התחבר
+					</button>
 
-			<br />
-			{/* <button onClick={() => handleTest()}>TestCookie</button> */}
-			<br />
+					<br />
+					{/* <button onClick={() => handleTest()}>TestCookie</button> */}
+					<br />
 
-			<br />
-			<h1>{status}</h1>
+					<br />
+					<h1>{status}</h1>
+				</div>
+			</div>
 		</div>
 	);
 };

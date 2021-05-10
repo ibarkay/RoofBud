@@ -5,6 +5,10 @@
 	--orange-dark: #f7953c;
 	--yellow: #fff101;
 }
+@font-face {
+	font-family: myFirstFont;
+	src: url(../fonts/Bellefair-Regular.ttf);
+}
 li {
 	list-style-type: none;
 }
@@ -13,6 +17,7 @@ a {
 	color: var(--white);
 }
 body {
+	font-family: myFirstFont;
 	height: 100vh;
 	margin: 0;
 	padding: 0;
@@ -24,8 +29,11 @@ body {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-around;
+	font-weight: bold;
 }
 .home-container {
+	background: #39518167;
+	font-family: myFirstFont;
 	height: 80vh;
 	display: flex;
 	flex-direction: column;
@@ -39,7 +47,9 @@ body {
 	background: var(--orange);
 	text-decoration: none;
 }
-
+.home-container h1 {
+	font-family: myFirstFont;
+}
 .home-container a:hover {
 	color: var(--white);
 	background-color: var(--orange-dark);
@@ -51,15 +61,15 @@ body {
 
 .holder {
 	/* background: black; */
+	font-family: myFirstFont;
 	height: 80%;
 	display: flex;
-	justify-content: center;
+	justify-content: right;
 	flex-direction: column;
 	align-items: center;
-	text-align: center;
-	color: var(--orange-dark);
+	text-align: right;
+	color: var(--white);
 }
-
 .back-bg {
 	background: #39518193;
 	width: 40ch;
@@ -76,8 +86,56 @@ input[type="file"] {
 }
 
 .custom-file-upload {
+	font-family: myFirstFont;
 	border: 1px solid #ccc;
 	display: inline-block;
 	padding: 6px 12px;
 	cursor: pointer;
+}
+.iftach-container {
+	font-family: myFirstFont;
+	color: var(--white);
+	font-size: 1.3rem;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	text-align: center;
+	align-items: center;
+	height: 80vh;
+}
+.btnLog {
+	margin-top: 10px;
+	background: var(--blue);
+	color: var(--orange);
+	font-family: myFirstFont;
+	width: 10ch;
+	font-size: 4ch;
+	border-radius: 10%;
+	border-style: none;
+}
+.btnLog:hover {
+	cursor: pointer;
+	color: var(--orange-dark);
+}
+
+.iftach-btn {
+	color: var(--white);
+	background: var(--orange);
+}
+.iftach-btn:hover {
+	background: var(--orange-dark);
+}
+.float-btn {
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+.status {
+	margin: 0;
+	padding: 0;
+	position: absolute;
+	top: 10ch;
+}
+.upload {
+	transform: translateX(-30px);
 }

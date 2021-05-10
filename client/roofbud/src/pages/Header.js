@@ -32,7 +32,7 @@ const Header = ({ test, isLogged }) => {
 			<div>
 				<ul className="header">
 					<li>
-						<a href="/#/">Logo</a>
+						<a href="/#/">R00fBud</a>
 					</li>
 					<li>
 						<a href="/#/login">כניסה</a>
