@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Cookies from "universal-cookie";
+import history from "../conf/creatHistory";
 let uri = "";
 if (process.env.NODE_ENV === "production") {
 	uri = process.env.PUBLIC_URL;
@@ -8,7 +9,7 @@ if (process.env.NODE_ENV === "production") {
 	uri = "http://localhost:1337";
 }
 
-const Sign = () => {
+const Sign = ({ test }) => {
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
 	const [name, setName] = useState("");
@@ -49,6 +50,8 @@ const Sign = () => {
 				})
 				.then((res) => {
 					console.log(res);
+					test();
+					history.push("/match");
 				})
 				.catch((e) => {
 					console.log(e);

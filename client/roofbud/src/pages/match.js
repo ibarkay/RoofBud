@@ -52,7 +52,7 @@ const Match = () => {
 	// ----------------------------------------
 
 	return (
-		<div>
+		<div className="ui  center aligned container">
 			<h1>hi {user ? user.userName : null}</h1>
 			<br />
 			<input

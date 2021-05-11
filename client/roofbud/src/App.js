@@ -51,7 +51,7 @@ const App = () => {
 				<Header test={test} isLogged={isLogged} />
 				<div className="content">
 					<Route path="/login" exact component={() => <Login test={test} />} />
-					<Route path="/sign" exact component={Sign} />
+					<Route path="/sign" exact component={() => <Sign test={test} />} />
 					<Route path="/profile" exact component={Profile} />
 					<Route path="/match" exact component={Match} />
 					<Route path="/" exact component={Home} />
