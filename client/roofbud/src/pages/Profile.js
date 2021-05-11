@@ -16,6 +16,38 @@ const Profile = () => {
 	const [avatar, setAvatar] = useState("");
 	const [fileToUpload, setFileToUpload] = useState();
 	const [status, setStatus] = useState("");
+	const [fromDate, setFromDate] = useState("");
+	const [toDate, setToDate] = useState("");
+	const [moreText, setMoreText] = useState("");
+	const [edit, setEdit] = useState(true);
+
+	const handleSaveClick = async () => {
+		const dataToSend = {};
+		if (fromDate) {
+			dataToSend["fromDate"] = fromDate;
+		}
+		if (toDate) {
+			dataToSend["toDate"] = toDate;
+		}
+		if (moreText) {
+			dataToSend["moreText"] = moreText;
+		}
+		console.log(dataToSend);
+		await axios
+			.patch(
+				`${uri}/api/users/${user.userName}`,
+				{ ...dataToSend },
+				{
+					headers: { Authorization: cookie.get("token") },
+				}
+			)
+			.then((res) => {
+				console.log("ok changed");
+			})
+			.catch((e) => {
+				console.log(e.message);
+			});
+	};
 
 	const handlePic = async (e) => {
 		try {
@@ -78,18 +110,58 @@ const Profile = () => {
 						<i className="fas fa-file-upload"></i>
 					</span>
 					<div className="content">
+						<button
+							style={{ position: "absolute", left: 10 }}
+							onClick={() => setEdit(!edit)}
+						>
+							<i className="far fa-edit"></i>
+						</button>
 						<a className="header">{user.name}</a>
 						<div className="meta">
-							<span className="date">{user.moreText}</span>
+							<span className="date">
+								{user.moreText}
+								<br />
+								{/* ! */}
+								<input
+									onChange={(e) => setMoreText(e.target.value)}
+									className={edit ? "hidden" : undefined}
+									type="text"
+									name=""
+									id=""
+								/>
+							</span>
 						</div>
 						<div className="description">
 							גיל : {user.age}
 							<br />
 							{user.gender ? "זכר" : "נקבה"}
 							<div className="dates">
-								מתאריך : {new Date(user.fromDate).toLocaleDateString("he-IL")}
+								{/* ! */}
+								<input
+									onChange={(e) => setFromDate(e.target.value)}
+									className={edit ? "hidden" : undefined}
+									type="date"
+									name=""
+									id=""
+								/>
+								מתאריך : {new Date(user.fromDate).toLocaleDateString("he-IL")}{" "}
 								<br />
-								עד תאריך : {new Date(user.toDate).toLocaleDateString("he-IL")}
+								{/* ! */}
+								<input
+									onChange={(e) => setToDate(e.target.value)}
+									className={edit ? "hidden" : undefined}
+									type="date"
+									name=""
+									id=""
+								/>
+								עד תאריך : {new Date(user.toDate).toLocaleDateString("he-IL")}{" "}
+								<br />
+								<button
+									onClick={() => handleSaveClick()}
+									className={edit ? "hidden" : undefined}
+								>
+									שמור שינויים
+								</button>
 							</div>
 						</div>
 					</div>

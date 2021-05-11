@@ -11,8 +11,13 @@ const upload = multer({
 	limits: {
 		fileSize: 1000000,
 	},
+
 	fileFilter(req, file, cb) {
-		if (!file.originalname.match(/\.(jpg|JPG|png|PNG|gif|GIF|jpeg|JPEG)$/)) {
+		if (
+			!file.originalname.match(
+				/\.(jpg|JPG|png|PNG|gif|GIF|jpeg|JPEG|bmp|BMP|webp|WebP|heif|HEIF)$/
+			)
+		) {
 			return cb(new Error("please jpg"));
 		}
 		cb(undefined, true);
@@ -137,13 +142,16 @@ app.delete("/api/users/:username", auth, async (req, res) => {
 app.patch("/api/users/:username", auth, async (req, res) => {
 	try {
 		const user = await User.findOne({ userName: req.params.username });
+		console.log(req.body);
 		for (let i of Object.keys(req.body)) {
 			user[i] = req.body[i];
 		}
 		await user.save();
 		res.send("user has been updated.");
+		console.log("ok");
 	} catch (e) {
 		res.status(500).send(e.message);
+		console.log(e.message);
 	}
 });
 //? login

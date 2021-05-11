@@ -134,8 +134,11 @@ input[type="file"] {
 	margin: 0;
 	padding: 0;
 	position: absolute;
-	top: 10ch;
+	top: 15px;
 }
 .upload {
 	transform: translateX(-30px);
+}
+.hidden {
+	display: none;
 }
