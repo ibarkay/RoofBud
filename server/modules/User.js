@@ -32,6 +32,14 @@ const userSchema = new mongoose.Schema({
 		{
 			msg: {
 				type: String,
+				meta: String,
+			},
+			from: {
+				type: String,
+			},
+			time: {
+				type: Date,
+				default: new Date(),
 			},
 		},
 	],

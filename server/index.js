@@ -30,6 +30,51 @@ app.use(express.json());
 // ----------import modules----------------
 const User = require("./modules/User");
 // ----------------------------------------
+
+// ? send msg
+app.post("/api/send/msg", auth, async (req, res) => {
+	try {
+		const user = await User.findOne({ userName: req.body.to });
+		console.log(req.body.msg);
+		const msg = {};
+		msg["msg"] = req.body.msg;
+		msg["from"] = req.body.from;
+		console.log(msg);
+		user.msgs = user.msgs.concat(msg);
+		user.save();
+		res.send("ok");
+	} catch (e) {
+		res.status(400).send(e.message);
+	}
+});
+
+// ?delete all msgs
+app.delete("/api/delete/msgs", auth, async (req, res) => {
+	try {
+		req.user.msgs = [];
+		req.user.save();
+		res.send("msgs cleaned");
+	} catch (e) {
+		res.status(400).send(e.message);
+	}
+});
+// ?delete msg by id
+// TODO : code here
+// !
+app.delete("/api/delete/msg/:id", auth, async (req, res) => {
+	try {
+		req.user.msgs = req.user.msgs.filter((m) => {
+			if (m._id !== req.params.id) {
+				return m;
+			}
+		});
+		req.user.save();
+		res.send("ok");
+	} catch (e) {
+		res.status(400).send(e.message);
+	}
+});
+
 // ?upload picture
 app.post(
 	"/api/users/me/avatar",
