@@ -25,15 +25,20 @@ export default class Crad extends Component {
 					</div>
 					<div class="content">
 						<span class="right floated">
-							<i class="heart outline like icon"></i>
-							17 likes
+							{/* <i class="heart outline like icon"></i>
+							17 likes */}
 						</span>
-						<i class="comment icon"></i>3 comments
+						{user.moreText}
+						<br />
+						גיל:{user.age}
+						<br />
+						מין:{user.gender ? "זכר" : "נקבה"}
 					</div>
 					<div class="extra content">
 						<div class="ui large transparent left icon input">
-							<i class="heart outline icon"></i>
-							<input type="text" placeholder="Add Comment..." />
+							<i class="far fa-comments"></i>
+							{/* !work on onchange - input */}
+							<input type="text" placeholder="שלח הודעה..." />
 						</div>
 					</div>
 				</div>

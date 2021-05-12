@@ -15,7 +15,9 @@ const Match = () => {
 	const [fromDate, setFromDate] = useState();
 	const [toDate, setToDate] = useState();
 	const [matches, setMatches] = useState([]);
+	const [index, setIndex] = useState(3);
 	const history = useHistory();
+
 	console.log(history);
 
 	// -----------------------------------
@@ -38,6 +40,23 @@ const Match = () => {
 		console.log(resp.data);
 		setMatches(resp.data);
 	};
+
+	const renderMatch = matches.map((m) => {
+		if (m.userName !== user.userName) {
+			return <Card prop={m} />;
+		}
+	});
+	const handleIndex = (param) => {
+		if (param === "+") {
+			if (index + 3 < renderMatch.length) {
+				setIndex(index + 3);
+			}
+		} else {
+			if (index - 3 >= 3) {
+				setIndex(index - 3);
+			}
+		}
+	};
 	// ------------------------------------------
 	useEffect(() => {
 		axios
@@ -53,7 +72,9 @@ const Match = () => {
 
 	return (
 		<div className="ui  center aligned container">
-			<h1>hi {user ? user.userName : null}</h1>
+			<h1>
+				שלום <br /> {user ? user.userName : null}
+			</h1>
 			<br />
 			<input
 				onChange={(e) => setFromDate(e.target.value)}
@@ -77,14 +98,23 @@ const Match = () => {
 			<input type="radio" id="age3" name="age" value="100" />
 
 			<br />
-			<button onClick={() => handleMatch()}>match</button>
-			{matches.length > 0
-				? matches.map((m) => {
+			<button onClick={() => handleMatch()}>!מצא לי שותף</button>
+			{matches.length ? (
+				<button onClick={() => handleIndex("+")}>עמוד הבא</button>
+			) : null}
+			{matches.length ? (
+				<button onClick={() => handleIndex("-")}>עמוד קודם</button>
+			) : null}
+			<div className="matches">
+				{/* {matches.length > 0
+					? matches.map((m) => {
 						if (m.userName !== user.userName) {
 							return <Card prop={m} />;
 						}
-				  })
-				: null}
+					})
+				: null} */}
+				{renderMatch.slice(index - 3, index)}
+			</div>
 		</div>
 	);
 };

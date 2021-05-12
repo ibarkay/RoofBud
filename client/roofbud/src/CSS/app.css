@@ -142,3 +142,7 @@ input[type="file"] {
 .hidden {
 	display: none;
 }
+.matches {
+	display: grid;
+	grid-template-columns: auto auto auto;
+}
