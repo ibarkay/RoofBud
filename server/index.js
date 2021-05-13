@@ -29,17 +29,16 @@ app.use(cors());
 app.use(express.json());
 // ----------import modules----------------
 const User = require("./modules/User");
-// ----------------------------------------
+
+// ----------END POINTS---------------
 
 // ? send msg
 app.post("/api/send/msg", auth, async (req, res) => {
 	try {
 		const user = await User.findOne({ userName: req.body.to });
-		console.log(req.body.msg);
 		const msg = {};
 		msg["msg"] = req.body.msg;
 		msg["from"] = req.body.from;
-		console.log(msg);
 		user.msgs = user.msgs.concat(msg);
 		user.save();
 		res.send("ok");
@@ -91,12 +90,14 @@ app.post(
 		res.status(400).send({ error: error.message });
 	}
 );
+
 // ?delete user picture
 app.delete("/api/users/me/avatar", auth, async (req, res) => {
 	req.user.avatar = undefined;
 	await req.user.save();
 	res.send("image was deleted");
 });
+
 // ?get user picture
 app.get("/api/users/:username/avatar", async (req, res) => {
 	try {
@@ -111,7 +112,6 @@ app.get("/api/users/:username/avatar", async (req, res) => {
 	}
 });
 
-//
 // ?get users
 app.get("/api/users", auth, async (req, res) => {
 	try {
@@ -121,6 +121,7 @@ app.get("/api/users", auth, async (req, res) => {
 		res.status(500).send(e.message);
 	}
 });
+
 // ?get user
 app.get("/api/users/:username", auth, async (req, res) => {
 	try {
@@ -130,6 +131,7 @@ app.get("/api/users/:username", auth, async (req, res) => {
 		res.status(500).send(e.message);
 	}
 });
+
 // ?get user2
 app.get("/api/m3", auth, async (req, res) => {
 	try {
@@ -168,6 +170,7 @@ app.post("/api/users", async (req, res) => {
 		res.status(500).send(e.message);
 	}
 });
+
 // ?delete a user
 app.delete("/api/users/:username", auth, async (req, res) => {
 	try {
@@ -179,22 +182,21 @@ app.delete("/api/users/:username", auth, async (req, res) => {
 		res.status(500).send(e.message);
 	}
 });
+
 // ?edit a user
 app.patch("/api/users/:username", auth, async (req, res) => {
 	try {
 		const user = await User.findOne({ userName: req.params.username });
-		console.log(req.body);
 		for (let i of Object.keys(req.body)) {
 			user[i] = req.body[i];
 		}
 		await user.save();
 		res.send("user has been updated.");
-		console.log("ok");
 	} catch (e) {
 		res.status(500).send(e.message);
-		console.log(e.message);
 	}
 });
+
 //? login
 app.post("/api/login", async (req, res) => {
 	try {
@@ -206,6 +208,7 @@ app.post("/api/login", async (req, res) => {
 		res.status(500).send(e.message);
 	}
 });
+
 // ?logout
 app.post("/api/logout", auth, async (req, res) => {
 	try {

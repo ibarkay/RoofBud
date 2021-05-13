@@ -3,7 +3,7 @@ import axios from "axios";
 import Cookies from "universal-cookie";
 import { useHistory } from "react-router-dom";
 import Card2 from "../components/Crad22";
-// ---------------------------------------
+// ------------url config--------------------
 let uri = "";
 if (process.env.NODE_ENV === "production") {
 	uri = process.env.PUBLIC_URL;
@@ -31,7 +31,6 @@ const Match = () => {
 				headers: { Authorization: cookie.get("token") },
 			}
 		);
-		console.log(resp.data);
 		setMatches(resp.data);
 	};
 
@@ -51,7 +50,7 @@ const Match = () => {
 			}
 		}
 	};
-	// ------------------------------------------
+	// ------------useEffect-------------------
 	useEffect(() => {
 		axios
 			.get(uri + "/api/m3", {

@@ -6,13 +6,14 @@ import Cookies from "universal-cookie";
 import Msg from "../components/msg";
 // ------------------------------------
 const cookie = new Cookies();
+// ------------------------------------
 let uri = "";
 if (process.env.NODE_ENV === "production") {
 	uri = process.env.PUBLIC_URL;
 } else {
 	uri = "http://localhost:1337";
 }
-
+// -----------------------------------
 const Profile = () => {
 	const [user, setUser] = useState({});
 	const [avatar, setAvatar] = useState("");
@@ -22,7 +23,7 @@ const Profile = () => {
 	const [toDate, setToDate] = useState("");
 	const [moreText, setMoreText] = useState("");
 	const [edit, setEdit] = useState(true);
-
+	// -----------------------------------------
 	const handleSaveClick = async () => {
 		const dataToSend = {};
 		if (fromDate) {
@@ -34,7 +35,7 @@ const Profile = () => {
 		if (moreText) {
 			dataToSend["moreText"] = moreText;
 		}
-		console.log(dataToSend);
+
 		await axios
 			.patch(
 				`${uri}/api/users/${user.userName}`,
@@ -53,7 +54,6 @@ const Profile = () => {
 
 	const handlePic = async (e) => {
 		try {
-			console.log(fileToUpload);
 			if (fileToUpload) {
 				const fd = new FormData();
 				fd.append("avatar", fileToUpload, fileToUpload.name);
@@ -75,7 +75,7 @@ const Profile = () => {
 		}
 	};
 
-	// -----------------------------------
+	// -----------useEffect----------------
 	useEffect(async () => {
 		await axios
 			.get(uri + "/api/m3", {
@@ -87,7 +87,7 @@ const Profile = () => {
 			.catch((e) => {});
 	}, []);
 
-	// -----------------------------------
+	// -----------JSX-------------------
 	if (user.userName) {
 		return (
 			<div className="holder">
@@ -123,7 +123,6 @@ const Profile = () => {
 							<span className="date">
 								{user.moreText}
 								<br />
-								{/* ! */}
 								<input
 									onChange={(e) => setMoreText(e.target.value)}
 									className={edit ? "hidden" : undefined}
@@ -138,7 +137,6 @@ const Profile = () => {
 							<br />
 							{user.gender ? "זכר" : "נקבה"}
 							<div className="dates">
-								{/* ! */}
 								<input
 									onChange={(e) => setFromDate(e.target.value)}
 									className={edit ? "hidden" : undefined}
@@ -148,7 +146,6 @@ const Profile = () => {
 								/>
 								מתאריך : {new Date(user.fromDate).toLocaleDateString("he-IL")}{" "}
 								<br />
-								{/* ! */}
 								<input
 									onChange={(e) => setToDate(e.target.value)}
 									className={edit ? "hidden" : undefined}
@@ -171,27 +168,9 @@ const Profile = () => {
 						<a>
 							<i class="fas fa-envelope-open-text"></i>
 							{user.msgs.length}
-							{/* !work here! */}
 							{user.msgs.map((msg) => {
 								return <Msg m={msg} user={user} />;
 							})}
-
-							{/* {user.msgs.map((msg) => {
-								return (
-									<div>
-										<h4 class="ui horizontal divider header">-</h4>
-										<p style={{ display: "inline" }}>{msg.from}</p>
-										<img
-											src={`${uri}/api/users/${msg.from}/avatar`}
-											width="30"
-											alt=""
-										/>
-										<h4>{msg.msg}</h4>
-										<button>מחק</button>
-										<button>שליחת הודעה</button>
-									</div>
-								);
-							})} */}
 						</a>
 					</div>
 				</div>
@@ -199,7 +178,7 @@ const Profile = () => {
 			</div>
 		);
 	}
-	return <div>not logged in</div>;
+	return <div>לא מוחבר</div>;
 };
 
 export default Profile;

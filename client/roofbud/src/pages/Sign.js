@@ -2,13 +2,14 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Cookies from "universal-cookie";
 import history from "../conf/creatHistory";
+// ------------uri config------------------------
 let uri = "";
 if (process.env.NODE_ENV === "production") {
 	uri = process.env.PUBLIC_URL;
 } else {
 	uri = "http://localhost:1337";
 }
-
+// ----------------------------------------
 const Sign = ({ test }) => {
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
@@ -77,8 +78,6 @@ const Sign = ({ test }) => {
 						name=""
 						id="username"
 					/>
-
-					{/* <input type="file" onChange={(e) => handleSelectFile(e)} /> */}
 					<label className="custom-file-upload">
 						<input
 							type="file"

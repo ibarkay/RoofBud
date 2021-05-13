@@ -10,7 +10,9 @@ if (process.env.NODE_ENV === "production") {
 } else {
 	uri = "http://localhost:1337";
 }
+// ----------------------------------------
 const Msg = ({ m, user }) => {
+	// ---------state----------------------
 	const [msg, setMsg] = useState("");
 	const [status, setStatus] = useState("");
 	const [hidden, setHidden] = useState(false);

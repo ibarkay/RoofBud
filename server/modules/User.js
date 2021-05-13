@@ -75,7 +75,6 @@ userSchema.pre("save", async function (next) {
 });
 
 userSchema.statics.findByCreds = async (userName, password) => {
-	console.log(userName, password);
 	const user = await User.findOne({ userName: userName });
 	if (!user) {
 		throw new Error("unable to login");

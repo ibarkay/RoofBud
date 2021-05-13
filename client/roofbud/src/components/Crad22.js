@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Cookies from "universal-cookie";
+// -------------url config------------------------
 
 let uri = "";
 if (process.env.NODE_ENV === "production") {
@@ -8,16 +9,17 @@ if (process.env.NODE_ENV === "production") {
 } else {
 	uri = "http://localhost:1337";
 }
-
+// --------------cookie setup-----------------
 const cookie = new Cookies();
-
+// ------------------------------------------
 const Card = ({ prop, master }) => {
+	// -------------state----------------------
 	const user = prop;
 	const [msg, setMsg] = useState("");
 	const [status, setStatus] = useState("");
 	const [hidden, setHidden] = useState(false);
 
-	// --------------------------------------------
+	// -----------functions-------------------------
 	const handleSendMsg = async () => {
 		await axios
 			.post(
@@ -38,7 +40,7 @@ const Card = ({ prop, master }) => {
 			.catch((e) => setStatus(e.message));
 	};
 
-	// --------------------------------------------
+	// -------------JSX------------------------
 	return (
 		<div>
 			<div className="ui card">
@@ -55,10 +57,7 @@ const Card = ({ prop, master }) => {
 					<img src={`${uri}/api/users/${user.userName}/avatar`} />
 				</div>
 				<div class="content">
-					<span class="right floated">
-						{/* <i class="heart outline like icon"></i>
-							17 likes */}
-					</span>
+					<span class="right floated"></span>
 					{user.moreText}
 					<br />
 					גיל:{user.age}
@@ -73,7 +72,6 @@ const Card = ({ prop, master }) => {
 						}
 					>
 						<i onClick={() => handleSendMsg()} class="far fa-paper-plane"></i>
-						{/* !work on onchange - input */}
 						<input
 							type="text"
 							onChange={(e) => setMsg(e.target.value)}

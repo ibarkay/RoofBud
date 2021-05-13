@@ -3,6 +3,7 @@ import axios from "axios";
 import Cookies from "universal-cookie";
 import { BrowserRouter, Route, HashRouter, Router } from "react-router-dom";
 import history from "../conf/creatHistory";
+// ---------------------------------------------
 
 const Login = ({ test }) => {
 	const cookie = new Cookies();
@@ -37,33 +38,6 @@ const Login = ({ test }) => {
 			});
 	};
 
-	const handleTest = async () => {
-		const resp = await axios
-			.get(uri + "/api/users", {
-				headers: { Authorization: cookie.get("token") },
-			})
-			.then(() => {
-				setStatus("cookie is valid!");
-			})
-			.catch((e) => {
-				setStatus(e.message);
-			});
-	};
-
-	const handleLogout = async () => {
-		const data = "";
-		const resp = await axios
-			.post(uri + "/api/logout", data, {
-				headers: { Authorization: cookie.get("token") },
-			})
-			.then(() => {
-				setStatus("logged out, token has been deleted.");
-			})
-			.catch((e) => {
-				setStatus(e.message);
-			});
-	};
-
 	// --------------------JSX--------------
 	return (
 		<div className="iftach-container">
@@ -93,10 +67,6 @@ const Login = ({ test }) => {
 					<button className="btnLog" onClick={() => handleLogin()}>
 						התחבר
 					</button>
-
-					<br />
-					{/* <button onClick={() => handleTest()}>TestCookie</button> */}
-					<br />
 
 					<br />
 					<h1>{status}</h1>

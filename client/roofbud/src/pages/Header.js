@@ -1,17 +1,18 @@
-import history from "../conf/creatHistory"; //!importent without it - i cant use history and hashrouter.
+import history from "../conf/creatHistory"; //!important without it - i cant use history and hashRouter.
 // ------------------------------------
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Cookies from "universal-cookie";
-
+// -------------------------------------
 const cookie = new Cookies();
+// --------uri config---------------------
 let uri = "";
 if (process.env.NODE_ENV === "production") {
 	uri = process.env.PUBLIC_URL;
 } else {
 	uri = "http://localhost:1337";
 }
-
+// --------------------------------------
 const Header = ({ test, isLogged }) => {
 	const handleLogout = async () => {
 		const data = "";
@@ -26,10 +27,10 @@ const Header = ({ test, isLogged }) => {
 		test();
 		history.push("/");
 	};
-
+	// ------------JSX---------------------
 	if (!isLogged) {
 		return (
-			<div>
+			<div className="sticky">
 				<ul className="header">
 					<li>
 						<a href="/#/">R00fBud</a>
@@ -42,7 +43,7 @@ const Header = ({ test, isLogged }) => {
 		);
 	} else {
 		return (
-			<div>
+			<div className="sticky">
 				<ul className="header">
 					<li>
 						<a href="/#/">Logo</a>

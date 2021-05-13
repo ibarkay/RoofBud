@@ -13,7 +13,9 @@ import Profile from "./pages/Profile";
 import Match from "./pages/match";
 import Home from "./pages/Home";
 import "./CSS/app.css";
+// -----------------------------------
 const cookie = new Cookies();
+// ------------------------------------
 let uri = "";
 if (process.env.NODE_ENV === "production") {
 	uri = process.env.PUBLIC_URL;
@@ -23,8 +25,10 @@ if (process.env.NODE_ENV === "production") {
 // ---------------------------------
 
 const App = () => {
+	// ---------state---------------
 	const [isLogged, setIsLogged] = useState(false);
 
+	// --------"prop" function--------------
 	const test = () => {
 		setIsLogged(!isLogged);
 	};
@@ -44,7 +48,7 @@ const App = () => {
 			});
 	}, []);
 	// !------------------------------
-
+	// -----------JSX-----------------
 	return (
 		<HashRouter basename="/" history={history}>
 			<div>
