@@ -59,16 +59,12 @@ app.delete("/api/delete/msgs", auth, async (req, res) => {
 	}
 });
 // ?delete msg by id
-// TODO : code here
-// !
 app.delete("/api/delete/msg/:id", auth, async (req, res) => {
 	try {
-		req.user.msgs = req.user.msgs.filter((m) => {
-			if (m._id !== req.params.id) {
-				return m;
-			}
+		req.user.msgs = await req.user.msgs.filter((m) => {
+			return m._id.toString() !== req.params.id;
 		});
-		req.user.save();
+		await req.user.save();
 		res.send("ok");
 	} catch (e) {
 		res.status(400).send(e.message);
@@ -82,7 +78,7 @@ app.post(
 	upload.single("avatar"), //*only then upload middleware
 	async (req, res) => {
 		const buffer = await sharp(req.file.buffer) //sharp-resize the img
-			.resize({ width: 200, height: 200 })
+			.resize({ width: 150, height: 150 })
 			.png()
 			.toBuffer();
 

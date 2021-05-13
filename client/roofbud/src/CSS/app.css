@@ -21,8 +21,11 @@ body {
 	height: 100vh;
 	margin: 0;
 	padding: 0;
-	background: url("../statics/shutterstock_463528040-scaled.jpg") no-repeat
-		center/cover;
+	background-image: url("../statics/shutterstock_463528040-scaled.jpg");
+	background-repeat: no-repeat cover;
+	background-attachment: fixed;
+	background-position: center;
+	background-size: cover;
 }
 .header {
 	color: var(--white);
@@ -145,4 +148,17 @@ input[type="file"] {
 .matches {
 	display: grid;
 	grid-template-columns: auto auto auto;
+}
+/* !here */
+.ui.card {
+	/* background: #fcb14091; */
+	text-align: right;
+	color: var(--blue);
+	font-size: 2ch;
+}
+.ui.large.transparent.left.icon input {
+	text-align: right;
+}
+.right.floated.meta img {
+	margin-left: 5px;
 }

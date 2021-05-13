@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
 import axios from "axios";
 import Cookies from "universal-cookie";
+
+import Msg from "../components/msg";
 // ------------------------------------
 const cookie = new Cookies();
 let uri = "";
@@ -167,8 +169,29 @@ const Profile = () => {
 					</div>
 					<div className="extra content">
 						<a>
-							<i className="user icon"></i>
-							22 Friends
+							<i class="fas fa-envelope-open-text"></i>
+							{user.msgs.length}
+							{/* !work here! */}
+							{user.msgs.map((msg) => {
+								return <Msg m={msg} user={user} />;
+							})}
+
+							{/* {user.msgs.map((msg) => {
+								return (
+									<div>
+										<h4 class="ui horizontal divider header">-</h4>
+										<p style={{ display: "inline" }}>{msg.from}</p>
+										<img
+											src={`${uri}/api/users/${msg.from}/avatar`}
+											width="30"
+											alt=""
+										/>
+										<h4>{msg.msg}</h4>
+										<button>מחק</button>
+										<button>שליחת הודעה</button>
+									</div>
+								);
+							})} */}
 						</a>
 					</div>
 				</div>

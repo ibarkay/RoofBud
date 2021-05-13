@@ -11,14 +11,15 @@ export default class Crad extends Component {
 		const user = this.props.prop;
 		return (
 			<div>
-				<div class="ui card">
+				<div className="ui card">
 					<div class="content">
-						<div class="right floated meta">14h</div>
-						<img
-							class="ui avatar image"
-							src={`${uri}/api/users/${user.userName}/avatar`}
-						/>{" "}
-						{this.props.prop.userName}
+						<div class="right floated meta">
+							{this.props.prop.userName}
+							<img
+								class="ui avatar image"
+								src={`${uri}/api/users/${user.userName}/avatar`}
+							/>
+						</div>
 					</div>
 					<div class="image">
 						<img src={`${uri}/api/users/${user.userName}/avatar`} />
