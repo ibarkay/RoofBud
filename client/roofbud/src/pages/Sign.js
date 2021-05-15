@@ -25,26 +25,27 @@ const Sign = ({ test }) => {
 	// ---------------------------------------------------
 	const handleSignIn = async () => {
 		const cookie = new Cookies();
-		const resp = await axios
-			.post(uri + "/api/users", {
-				userName: username,
-				password: password,
-				email: email,
-				name: name,
-				gender: gender,
-				age: age,
-				moreText: moreText,
-				fromDate: fromDate,
-				toDate: toDate,
-			})
-			.then((res) => {
-				cookie.set("token", res.data.token, { path: "/" });
-				setStatus("OK , user has been created.");
-			})
-			.catch((e) => {
-				setStatus(e.response.data);
-			});
-		if (fileToUpload) {
+		if (fileToUpload.name) {
+			const resp = await axios
+				.post(uri + "/api/users", {
+					userName: username,
+					password: password,
+					email: email,
+					name: name,
+					gender: gender,
+					age: age,
+					moreText: moreText,
+					fromDate: fromDate,
+					toDate: toDate,
+				})
+				.then((res) => {
+					cookie.set("token", res.data.token, { path: "/" });
+					setStatus("OK , user has been created.");
+				})
+				.catch((e) => {
+					setStatus(e.response.data);
+				});
+
 			const fd = new FormData();
 			fd.append("avatar", fileToUpload, fileToUpload.name);
 			axios
@@ -60,6 +61,7 @@ const Sign = ({ test }) => {
 					console.log(e);
 				});
 		}
+		setStatus("נא בחר קובץ תמונה");
 	};
 
 	const handleSelectFile = async (e) => {

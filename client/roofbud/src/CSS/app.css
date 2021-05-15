@@ -26,6 +26,13 @@ li {
 a {
 	color: var(--white);
 }
+
+input,
+h1 {
+	font-family: myFirstFont;
+	padding: 0;
+}
+
 .ui.center.aligned.container {
 	padding-top: 60px;
 }
@@ -34,8 +41,10 @@ a {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-around;
-
 	font-weight: bold;
+}
+a:hover {
+	color: var(--orange-dark);
 }
 .home-container {
 	background: #39518167;
@@ -66,8 +75,8 @@ a {
 }
 
 .holder {
-	padding-top: 60px;
 	font-family: myFirstFont;
+	margin-top: 60px;
 	height: 80%;
 	display: flex;
 	justify-content: right;
@@ -83,9 +92,14 @@ button {
 	text-decoration: none;
 }
 .back-bg {
-	background: #39518193;
+	margin-top: 60px;
+	background: #81533993;
 	width: 40ch;
 	border-radius: 10%;
+	margin-bottom: 20px;
+}
+.back-bg input {
+	align-self: center;
 }
 .fsize {
 	display: flex;
@@ -116,17 +130,18 @@ input[type="file"] {
 }
 .btnLog {
 	margin-top: 10px;
-	background: var(--blue);
-	color: var(--orange);
+	background: var(--orange-dark);
+	color: var(--blue);
 	font-family: myFirstFont;
-	width: 10ch;
+	width: 12ch;
 	font-size: 4ch;
-	border-radius: 10%;
+	border-radius: 5%;
 	border-style: none;
+	border: 0.5px solid black;
 }
 .btnLog:hover {
 	cursor: pointer;
-	color: var(--orange-dark);
+	background: var(--orange);
 }
 
 .iftach-btn {
@@ -154,13 +169,28 @@ input[type="file"] {
 	display: none;
 }
 .matches {
-	display: grid;
-	grid-template-columns: auto auto auto;
+	display: flex;
+
+	justify-content: space-around;
+	align-items: center;
+}
+@media only screen and (max-width: 600px) {
+	.matches {
+		flex-direction: column;
+	}
+	.ui.card {
+		border: 3px solid black;
+	}
 }
 .ui.card {
 	text-align: right;
 	color: var(--blue);
+	font-weight: bold;
 	font-size: 2ch;
+	background: #f7963cce;
+}
+.buttons {
+	margin-bottom: 15px;
 }
 .ui.large.transparent.left.icon input {
 	text-align: right;
@@ -169,7 +199,7 @@ input[type="file"] {
 	margin-left: 5px;
 }
 .sticky {
-	background: #3951816b;
+	background: #395181b6;
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -179,4 +209,9 @@ input[type="file"] {
 h2 {
 	font-family: myFirstFont;
 	color: var(--white);
+}
+
+.match-win {
+	background: #39518177;
+	border-radius: 1.5%;
 }

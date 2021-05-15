@@ -34,7 +34,7 @@ const Login = ({ test }) => {
 				history.push("/profile");
 			})
 			.catch((e) => {
-				setStatus("no soup for you!");
+				setStatus("שם מתשמש או ססמא שגויים");
 			});
 	};
 

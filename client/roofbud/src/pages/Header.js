@@ -46,7 +46,7 @@ const Header = ({ test, isLogged }) => {
 			<div className="sticky">
 				<ul className="header">
 					<li>
-						<a href="/#/">Logo</a>
+						<a href="/#/">R00fBud</a>
 					</li>
 
 					<li>

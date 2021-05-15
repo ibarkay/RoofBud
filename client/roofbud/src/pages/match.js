@@ -67,54 +67,57 @@ const Match = () => {
 
 	return (
 		<div className="ui  center aligned container">
-			<h2>
-				שלום <br /> {user ? user.name : null} <br />
-				בוא נמצא חבר לגג
-			</h2>
-			<br />
-			<input
-				onChange={(e) => setFromDate(e.target.value)}
-				type="date"
-				name="fromDate"
-				id="fromDate"
-			/>
-			<br />
-			<input
-				onChange={(e) => setToDate(e.target.value)}
-				type="date"
-				name="toDate"
-				id="toDate"
-			/>
-			<br />
-			<div>
-				<label htmlFor="male">זכר</label>
+			<div className="match-win">
+				<h2>
+					שלום <br /> {user ? user.name : null} <br />
+					בוא נמצא חבר לגג
+				</h2>
+				<br />
 				<input
-					onClick={() => setGender(false)}
-					type="radio"
-					id="male"
-					name="gender"
-					value="male"
+					onChange={(e) => setFromDate(e.target.value)}
+					type="date"
+					name="fromDate"
+					id="fromDate"
 				/>
-				<label htmlFor="female">נקבה</label>
+				<br />
 				<input
-					onClick={() => setGender(true)}
-					type="radio"
-					id="female"
-					name="gender"
-					value="male"
+					onChange={(e) => setToDate(e.target.value)}
+					type="date"
+					name="toDate"
+					id="toDate"
 				/>
+				<br />
+				<div>
+					<label htmlFor="male">זכר</label>
+					<input
+						onClick={() => setGender(false)}
+						type="radio"
+						id="male"
+						name="gender"
+						value="male"
+					/>
+					<label htmlFor="female">נקבה</label>
+					<input
+						onClick={() => setGender(true)}
+						type="radio"
+						id="female"
+						name="gender"
+						value="male"
+					/>
+				</div>
+				<br />
+				<div className="buttons">
+					<button onClick={() => handleMatch()}>!מצא לי שותף</button>
+					{matches.length ? (
+						<button onClick={() => handleIndex("+")}>עמוד הבא</button>
+					) : null}
+					{matches.length ? (
+						<button onClick={() => handleIndex("-")}>עמוד קודם</button>
+					) : null}
+				</div>
+				{/* <div className="matches">{renderMatch.slice(index - 3, index)}</div> */}
+				<div className="matches">{renderMatch}</div>
 			</div>
-			<br />
-
-			<button onClick={() => handleMatch()}>!מצא לי שותף</button>
-			{matches.length ? (
-				<button onClick={() => handleIndex("+")}>עמוד הבא</button>
-			) : null}
-			{matches.length ? (
-				<button onClick={() => handleIndex("-")}>עמוד קודם</button>
-			) : null}
-			{/* <div className="matches">{renderMatch.slice(index - 3, index)}</div> */}
-			<div className="matches">{renderMatch}</div>
 		</div>
 	);
 };
