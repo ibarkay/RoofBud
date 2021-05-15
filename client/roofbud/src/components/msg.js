@@ -11,7 +11,7 @@ if (process.env.NODE_ENV === "production") {
 	uri = "http://localhost:1337";
 }
 // ----------------------------------------
-const Msg = ({ m, user }) => {
+const Msg = ({ m, user, reRender }) => {
 	// ---------state----------------------
 	const [msg, setMsg] = useState("");
 	const [status, setStatus] = useState("");
@@ -21,6 +21,7 @@ const Msg = ({ m, user }) => {
 		await axios.delete(`${uri}/api/delete/msg/${m._id}`, {
 			headers: { Authorization: cookie.get("token") },
 		});
+		reRender();
 	};
 	const handleSendMsg = async () => {
 		await axios
@@ -55,7 +56,6 @@ const Msg = ({ m, user }) => {
 					className={hidden ? "hidden" : "ui large transparent left icon input"}
 				>
 					<i onClick={() => handleSendMsg()} class="far fa-paper-plane"></i>
-					{/* !work on onchange - input */}
 					<input
 						type="text"
 						onChange={(e) => setMsg(e.target.value)}

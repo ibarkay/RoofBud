@@ -1,11 +1,24 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const validator = require("validator");
+const { SECRET } = require("../config/KEY");
 // ----------Schema------------------
 const userSchema = new mongoose.Schema({
 	userName: {
 		type: String,
 		unique: true,
+	},
+	email: {
+		type: String,
+		required: true,
+		unique: true,
+		validate(value) {
+			if (!validator.isEmail(value)) {
+				throw new Error("illegal Email.");
+			}
+		},
+		minlength: 5,
 	},
 	name: {
 		type: String,
@@ -88,7 +101,7 @@ userSchema.statics.findByCreds = async (userName, password) => {
 
 userSchema.methods.generateAuthToken = async function () {
 	const user = this;
-	const token = jwt.sign({ userName: user.userName }, "ibarkay");
+	const token = jwt.sign({ userName: user.userName }, `${SECRET}`);
 	user.tokens = user.tokens.concat({ token });
 	await user.save();
 	return token;

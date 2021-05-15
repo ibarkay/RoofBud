@@ -23,6 +23,7 @@ const Profile = () => {
 	const [toDate, setToDate] = useState("");
 	const [moreText, setMoreText] = useState("");
 	const [edit, setEdit] = useState(true);
+	const [hidden, setHidden] = useState(true);
 	// -----------------------------------------
 	const handleSaveClick = async () => {
 		const dataToSend = {};
@@ -51,7 +52,10 @@ const Profile = () => {
 				console.log(e.message);
 			});
 	};
-
+	const reRender = () => {
+		setHidden(!hidden);
+		setHidden(!hidden);
+	};
 	const handlePic = async (e) => {
 		try {
 			if (fileToUpload) {
@@ -166,11 +170,16 @@ const Profile = () => {
 					</div>
 					<div className="extra content">
 						<a>
-							<i class="fas fa-envelope-open-text"></i>
+							<i
+								onClick={() => setHidden(!hidden)}
+								class="fas fa-envelope-open-text"
+							></i>
 							{user.msgs.length}
-							{user.msgs.map((msg) => {
-								return <Msg m={msg} user={user} />;
-							})}
+							<div className={hidden ? "hidden" : "msgz"}>
+								{user.msgs.map((msg) => {
+									return <Msg m={msg} user={user} reRender={reRender} />;
+								})}
+							</div>
 						</a>
 					</div>
 				</div>

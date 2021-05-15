@@ -12,6 +12,7 @@ if (process.env.NODE_ENV === "production") {
 // ----------------------------------------
 const Sign = ({ test }) => {
 	const [username, setUsername] = useState("");
+	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [name, setName] = useState("");
 	const [age, setAge] = useState(0);
@@ -28,6 +29,7 @@ const Sign = ({ test }) => {
 			.post(uri + "/api/users", {
 				userName: username,
 				password: password,
+				email: email,
 				name: name,
 				gender: gender,
 				age: age,
@@ -77,6 +79,13 @@ const Sign = ({ test }) => {
 						type="text"
 						name=""
 						id="username"
+					/>
+					<label htmlFor="email">כתובת דואר אלקטרוני</label>
+					<input
+						onChange={(e) => setEmail(e.target.value)}
+						type="email"
+						name="email"
+						id="email"
 					/>
 					<label className="custom-file-upload">
 						<input

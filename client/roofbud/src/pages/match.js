@@ -16,6 +16,7 @@ const Match = () => {
 	const [user, setUser] = useState();
 	const [fromDate, setFromDate] = useState();
 	const [toDate, setToDate] = useState();
+	const [gender, setGender] = useState();
 	const [matches, setMatches] = useState([]);
 	const [index, setIndex] = useState(3);
 
@@ -24,9 +25,10 @@ const Match = () => {
 	// -----------------------------------
 
 	const handleMatch = async () => {
+		setMatches([]);
 		const resp = await axios.post(
 			uri + "/api/users/date",
-			{ toDate: toDate, fromDate: fromDate },
+			{ toDate: toDate, fromDate: fromDate, gender: gender },
 			{
 				headers: { Authorization: cookie.get("token") },
 			}
@@ -66,7 +68,7 @@ const Match = () => {
 	return (
 		<div className="ui  center aligned container">
 			<h2>
-				שלום <br /> {user ? user.userName : null} <br />
+				שלום <br /> {user ? user.name : null} <br />
 				בוא נמצא חבר לגג
 			</h2>
 			<br />
@@ -84,6 +86,26 @@ const Match = () => {
 				id="toDate"
 			/>
 			<br />
+			<div>
+				<label htmlFor="male">זכר</label>
+				<input
+					onClick={() => setGender(false)}
+					type="radio"
+					id="male"
+					name="gender"
+					value="male"
+				/>
+				<label htmlFor="female">נקבה</label>
+				<input
+					onClick={() => setGender(true)}
+					type="radio"
+					id="female"
+					name="gender"
+					value="male"
+				/>
+			</div>
+			<br />
+
 			<button onClick={() => handleMatch()}>!מצא לי שותף</button>
 			{matches.length ? (
 				<button onClick={() => handleIndex("+")}>עמוד הבא</button>
@@ -91,7 +113,8 @@ const Match = () => {
 			{matches.length ? (
 				<button onClick={() => handleIndex("-")}>עמוד קודם</button>
 			) : null}
-			<div className="matches">{renderMatch.slice(index - 3, index)}</div>
+			{/* <div className="matches">{renderMatch.slice(index - 3, index)}</div> */}
+			<div className="matches">{renderMatch}</div>
 		</div>
 	);
 };

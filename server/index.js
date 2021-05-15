@@ -5,6 +5,8 @@ const cors = require("cors");
 const auth = require("./middleware/auth");
 const multer = require("multer");
 const sharp = require("sharp");
+const nodemailer = require("nodemailer");
+
 app.use(express.static("public"));
 // -----file upload settings-----
 const upload = multer({
@@ -29,6 +31,7 @@ app.use(cors());
 app.use(express.json());
 // ----------import modules----------------
 const User = require("./modules/User");
+const SendEmail = require("./modules/Email");
 
 // ----------END POINTS---------------
 
@@ -41,6 +44,22 @@ app.post("/api/send/msg", auth, async (req, res) => {
 		msg["from"] = req.body.from;
 		user.msgs = user.msgs.concat(msg);
 		user.save();
+		// !sending mail is possible now work here.
+		SendEmail.sendMail(
+			{
+				from: "7oofbud@gmail.com",
+				to: user.email,
+				subject: "r00fBud -> הודעה חדשה",
+				text: ` יש לך הודעה חדשה מ \n ${msg.from} \n https://r00fbud.herokuapp.com/`,
+			},
+			(error, info) => {
+				if (error) {
+					console.log(error);
+				} else {
+					console.log(info.response);
+				}
+			}
+		);
 		res.send("ok");
 	} catch (e) {
 		res.status(400).send(e.message);
@@ -145,14 +164,14 @@ app.get("/api/m3", auth, async (req, res) => {
 // ?match dates
 app.post("/api/users/date", auth, async (req, res) => {
 	try {
-		const matches = await User.find({
-			toDate: {
-				$lte: Date.parse(new Date(req.body.toDate)),
-			},
-			fromDate: {
-				$lte: Date.parse(new Date(req.body.toDate)),
-			},
-		});
+		const users = await User.find({});
+		// console.log(req.body);
+		const matches = users.filter(
+			(user) =>
+				user.fromDate - new Date(req.body.fromDate) >= 0 &&
+				user.toDate - new Date(req.body.toDate) <= 0 &&
+				user.gender === req.body.gender
+		);
 		res.send(matches);
 	} catch (e) {
 		res.status(500).send(e.message);
