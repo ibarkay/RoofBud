@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import Cookies from "universal-cookie";
 // -------------url config------------------------
@@ -44,20 +44,21 @@ const Card = ({ prop, master }) => {
 	return (
 		<div>
 			<div className="ui card">
-				<div class="content">
-					<div class="right floated meta">
+				<div className="content">
+					<div className="right floated meta">
 						{user.userName}
 						<img
-							class="ui avatar image"
+							className="ui avatar image"
 							src={`${uri}/api/users/${user.userName}/avatar`}
+							alt=""
 						/>
 					</div>
 				</div>
-				<div class="image">
-					<img src={`${uri}/api/users/${user.userName}/avatar`} />
+				<div className="image">
+					<img src={`${uri}/api/users/${user.userName}/avatar`} alt="" />
 				</div>
-				<div class="content">
-					<span class="right floated"></span>
+				<div className="content">
+					<span className="right floated"></span>
 					{user.moreText}
 					<br />
 					גיל:{user.age}
@@ -66,12 +67,14 @@ const Card = ({ prop, master }) => {
 				</div>
 				<div className="extra content">
 					<div
-						className="ui large transparent left icon input"
 						className={
 							hidden ? "hidden" : "ui large transparent left icon input"
 						}
 					>
-						<i onClick={() => handleSendMsg()} class="far fa-paper-plane"></i>
+						<i
+							onClick={() => handleSendMsg()}
+							className="far fa-paper-plane"
+						></i>
 						<input
 							type="text"
 							onChange={(e) => setMsg(e.target.value)}

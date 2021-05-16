@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Cookies from "universal-cookie";
-import { useHistory } from "react-router-dom";
 import Card2 from "../components/Crad22";
 // ------------url config--------------------
 let uri = "";
@@ -38,8 +37,9 @@ const Match = () => {
 
 	const renderMatch = matches.map((m) => {
 		if (m.userName !== user.userName) {
-			return <Card2 prop={m} master={user} />;
+			return <Card2 key={m._id} prop={m} master={user} />;
 		}
+		return null;
 	});
 	const handleIndex = (param) => {
 		if (param === "+") {
@@ -108,6 +108,10 @@ const Match = () => {
 				<br />
 				<div className="buttons">
 					<button onClick={() => handleMatch()}>!מצא לי שותף</button>
+				</div>
+				{/* <div className="matches">{renderMatch.slice(index - 3, index)}</div> */}
+				<div className="matches">{renderMatch}</div>
+				<div className="buttons">
 					{matches.length ? (
 						<button onClick={() => handleIndex("+")}>עמוד הבא</button>
 					) : null}
@@ -115,8 +119,6 @@ const Match = () => {
 						<button onClick={() => handleIndex("-")}>עמוד קודם</button>
 					) : null}
 				</div>
-				{/* <div className="matches">{renderMatch.slice(index - 3, index)}</div> */}
-				<div className="matches">{renderMatch}</div>
 			</div>
 		</div>
 	);

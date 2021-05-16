@@ -11,7 +11,7 @@ if (process.env.NODE_ENV === "production") {
 	uri = "http://localhost:1337";
 }
 // ----------------------------------------
-const Msg = ({ m, user, reRender }) => {
+const Msg = ({ m, user, reRender, callForRender }) => {
 	// ---------state----------------------
 	const [msg, setMsg] = useState("");
 	const [status, setStatus] = useState("");
@@ -21,7 +21,7 @@ const Msg = ({ m, user, reRender }) => {
 		await axios.delete(`${uri}/api/delete/msg/${m._id}`, {
 			headers: { Authorization: cookie.get("token") },
 		});
-		reRender();
+		callForRender();
 	};
 	const handleSendMsg = async () => {
 		await axios
@@ -52,7 +52,6 @@ const Msg = ({ m, user, reRender }) => {
 			<button onClick={() => handleDelete()}>מחק</button>
 			<div className="extra content">
 				<div
-					className="ui large transparent left icon input"
 					className={hidden ? "hidden" : "ui large transparent left icon input"}
 				>
 					<i onClick={() => handleSendMsg()} class="far fa-paper-plane"></i>

@@ -1,11 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import axios from "axios";
 import Cookies from "universal-cookie";
-import { BrowserRouter, Route, HashRouter, Router } from "react-router-dom";
+
 import history from "../conf/creatHistory";
 // ---------------------------------------------
 
-const Login = ({ test }) => {
+const Login = ({ test, callForRender }) => {
 	const cookie = new Cookies();
 	// -----------url config-----------
 	let uri = "";
@@ -22,7 +22,7 @@ const Login = ({ test }) => {
 	// -------functions/handlers------------
 
 	const handleLogin = async () => {
-		const resp = await axios
+		await axios
 			.post(uri + "/api/login", {
 				userName: usernameInput,
 				password: passwordInput,
@@ -31,6 +31,7 @@ const Login = ({ test }) => {
 				cookie.set("token", res.data.token, { path: "/" });
 				setStatus("i know you !, token saved, cookie has been baked");
 				test();
+				callForRender();
 				history.push("/profile");
 			})
 			.catch((e) => {

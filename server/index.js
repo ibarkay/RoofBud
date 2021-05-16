@@ -169,8 +169,8 @@ app.post("/api/users/date", auth, async (req, res) => {
 		const matches = users.filter(
 			(user) =>
 				user.isActive &&
-				user.fromDate - new Date(req.body.fromDate) >= 0 &&
-				user.toDate - new Date(req.body.toDate) <= 0 &&
+				user.fromDate - new Date(req.body.fromDate) <= 0 &&
+				user.toDate - new Date(req.body.toDate) >= 0 &&
 				user.gender === req.body.gender
 		);
 		res.send(matches);

@@ -27,36 +27,56 @@ if (process.env.NODE_ENV === "production") {
 const App = () => {
 	// ---------state---------------
 	const [isLogged, setIsLogged] = useState(false);
+	const [user, setUser] = useState({ userName: "no", msgs: [] });
+	const [render, setRender] = useState(1);
 
 	// --------"prop" function--------------
 	const test = () => {
 		setIsLogged(!isLogged);
 	};
+	const callForRender = () => {
+		setRender(render + 1);
+	};
 
 	// !----useEff--------
 	useEffect(() => {
-		console.log(isLogged);
 		axios
 			.get(uri + "/api/m3", {
 				headers: { Authorization: cookie.get("token") },
 			})
 			.then((res) => {
 				setIsLogged(true);
+				setUser(res.data);
 			})
 			.catch((e) => {
-				console.log(e.message);
+				// console.log(e.message);
 			});
-	}, []);
+	}, [render]);
 	// !------------------------------
 	// -----------JSX-----------------
 	return (
 		<HashRouter basename="/" history={history}>
 			<div>
-				<Header test={test} isLogged={isLogged} />
+				<Header
+					test={test}
+					isLogged={isLogged}
+					user={user}
+					callForRender={callForRender}
+				/>
 				<div className="content">
-					<Route path="/login" exact component={() => <Login test={test} />} />
+					<Route
+						path="/login"
+						exact
+						component={() => (
+							<Login test={test} callForRender={callForRender} />
+						)}
+					/>
 					<Route path="/sign" exact component={() => <Sign test={test} />} />
-					<Route path="/profile" exact component={Profile} />
+					<Route
+						path="/profile"
+						exact
+						component={() => <Profile callForRender={callForRender} />}
+					/>
 					<Route path="/match" exact component={Match} />
 					<Route path="/" exact component={Home} />
 				</div>

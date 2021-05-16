@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { Redirect } from "react-router-dom";
 import axios from "axios";
 import Cookies from "universal-cookie";
 
@@ -14,7 +13,7 @@ if (process.env.NODE_ENV === "production") {
 	uri = "http://localhost:1337";
 }
 // -----------------------------------
-const Profile = () => {
+const Profile = ({ callForRender }) => {
 	const [user, setUser] = useState({});
 	const [avatar, setAvatar] = useState("");
 	const [fileToUpload, setFileToUpload] = useState();
@@ -23,8 +22,8 @@ const Profile = () => {
 	const [toDate, setToDate] = useState("");
 	const [moreText, setMoreText] = useState("");
 	const [edit, setEdit] = useState(true);
-	const [isActive, setIsAvtive] = useState();
 	const [hidden, setHidden] = useState(true);
+	const [render, setRender] = useState(1);
 	// -----------------------------------------
 	const handleSaveClick = async () => {
 		const dataToSend = {};
@@ -47,7 +46,8 @@ const Profile = () => {
 				}
 			)
 			.then((res) => {
-				console.log("ok changed");
+				// console.log("ok changed");
+				setRender(render + 1);
 			})
 			.catch((e) => {
 				console.log(e.message);
@@ -57,6 +57,7 @@ const Profile = () => {
 		setHidden(!hidden);
 		setHidden(!hidden);
 	};
+
 	const handlePic = async (e) => {
 		try {
 			if (fileToUpload) {
@@ -81,17 +82,16 @@ const Profile = () => {
 	};
 
 	const handleActive = async () => {
-		console.log(isActive);
 		await axios
 			.patch(
 				`${uri}/api/users/${user.userName}`,
-				{ isActive: !isActive },
+				{ isActive: !user.isActive },
 				{
 					headers: { Authorization: cookie.get("token") },
 				}
 			)
 			.then((res) => {
-				console.log(res);
+				setRender(render + 1);
 			})
 			.catch((e) => {
 				console.log(e.message);
@@ -99,17 +99,19 @@ const Profile = () => {
 	};
 
 	// -----------useEffect----------------
-	useEffect(async () => {
-		await axios
-			.get(uri + "/api/m3", {
-				headers: { Authorization: cookie.get("token") },
-			})
-			.then((res) => {
-				setUser(res.data);
-				setIsAvtive(user.isActive);
-			})
-			.catch((e) => {});
-	}, []);
+	useEffect(() => {
+		const func = async () => {
+			await axios
+				.get(uri + "/api/m3", {
+					headers: { Authorization: cookie.get("token") },
+				})
+				.then((res) => {
+					setUser(res.data);
+				})
+				.catch((e) => {});
+		};
+		func();
+	}, [render]);
 
 	// -----------JSX-------------------
 	if (user.userName) {
@@ -142,7 +144,7 @@ const Profile = () => {
 						>
 							<i className="far fa-edit"></i>
 						</button>
-						<a className="header">{user.name}</a>
+						<h1 style={{ padding: 0, margin: 0 }}>{user.name}</h1>
 						<div className="meta">
 							<span className="date">
 								{user.moreText}
@@ -204,7 +206,14 @@ const Profile = () => {
 							<span className="msg-count">{user.msgs.length}</span>
 							<div className={hidden ? "hidden" : "msgz"}>
 								{user.msgs.map((msg) => {
-									return <Msg m={msg} user={user} reRender={reRender} />;
+									return (
+										<Msg
+											m={msg}
+											user={user}
+											reRender={reRender}
+											callForRender={callForRender}
+										/>
+									);
 								})}
 							</div>
 						</div>

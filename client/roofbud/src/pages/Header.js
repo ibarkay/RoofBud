@@ -1,6 +1,6 @@
 import history from "../conf/creatHistory"; //!important without it - i cant use history and hashRouter.
 // ------------------------------------
-import { useState, useEffect } from "react";
+
 import axios from "axios";
 import Cookies from "universal-cookie";
 // -------------------------------------
@@ -13,20 +13,21 @@ if (process.env.NODE_ENV === "production") {
 	uri = "http://localhost:1337";
 }
 // --------------------------------------
-const Header = ({ test, isLogged }) => {
+const Header = ({ test, isLogged, user }) => {
 	const handleLogout = async () => {
 		const data = "";
-		const resp = await axios
+		await axios
 			.post(uri + "/api/logout", data, {
 				headers: { Authorization: cookie.get("token") },
 			})
 			.then(() => {})
 			.catch((e) => {
-				console.log(e);
+				// console.log(e);
 			});
 		test();
 		history.push("/");
 	};
+
 	// ------------JSX---------------------
 	if (!isLogged) {
 		return (
@@ -46,17 +47,28 @@ const Header = ({ test, isLogged }) => {
 			<div className="sticky">
 				<ul className="header">
 					<li>
-						<a href="/#/">R00fBud</a>
+						<button onClick={() => handleLogout()}>התנתק</button>
 					</li>
 
-					<li>
-						<a href="/#/profile">אני</a>
-					</li>
 					<li>
 						<a href="/#/match">מצא לי חבר לגג</a>
 					</li>
 					<li>
-						<button onClick={() => handleLogout()}>התנתק</button>
+						<a href="/#/profile">
+							<img
+								className="ui avatar image red-border"
+								src={`${uri}/api/users/${user.userName}/avatar`}
+								alt=""
+							/>
+							<span>
+								{user.msgs.length > 0 ? (
+									<span className="msg-count2">{user.msgs.length}</span>
+								) : null}
+							</span>
+						</a>
+					</li>
+					<li>
+						<a href="/#/">R00fBud</a>
 					</li>
 				</ul>
 			</div>

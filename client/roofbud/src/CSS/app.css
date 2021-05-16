@@ -128,6 +128,12 @@ input[type="file"] {
 	align-items: center;
 	height: 80vh;
 }
+.msg-count2 {
+	background: red;
+	padding: 5px;
+	border-radius: 50%;
+	font-size: 0.5rem;
+}
 .btnLog {
 	margin-top: 10px;
 	background: var(--orange-dark);
@@ -201,8 +207,15 @@ input[type="file"] {
 .ui.cards > .card > .extra a:not(.ui),
 .ui.input,
 .ui.card > .extra,
-.ui.cards > .card > .extra {
+.ui.cards > .card > .extra,
+.ui.card > .content > .header,
+.ui.cards > .card > .content > .header {
 	color: var(--white);
+}
+.ui.card > .content > .header,
+.ui.cards > .card > .content > .header {
+	font-family: myFirstFont;
+	font-size: 20px;
 }
 .gender {
 	font-size: 2rem;
@@ -213,6 +226,13 @@ input[type="file"] {
 	margin-left: 10px;
 	/* color: red; */
 	font-size: 1.5rem;
+}
+.red-border {
+	border: 1px solid #ffffff;
+	transition: all ease-in-out 0.4s;
+}
+.red-border:hover {
+	border: 1px solid #f7953c;
 }
 .buttons {
 	margin-bottom: 15px;

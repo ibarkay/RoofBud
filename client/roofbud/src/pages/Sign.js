@@ -1,7 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import axios from "axios";
 import Cookies from "universal-cookie";
 import history from "../conf/creatHistory";
+
 // ------------uri config------------------------
 let uri = "";
 if (process.env.NODE_ENV === "production") {
@@ -22,11 +23,12 @@ const Sign = ({ test }) => {
 	const [moreText, setMoreText] = useState("");
 	const [gender, setGender] = useState();
 	const [fileToUpload, setFileToUpload] = useState({});
+	const year = new Date().getFullYear();
 	// ---------------------------------------------------
 	const handleSignIn = async () => {
 		const cookie = new Cookies();
 		if (fileToUpload.name) {
-			const resp = await axios
+			await axios
 				.post(uri + "/api/users", {
 					userName: username,
 					password: password,
@@ -53,13 +55,10 @@ const Sign = ({ test }) => {
 					headers: { Authorization: cookie.get("token") },
 				})
 				.then((res) => {
-					console.log(res);
 					test();
 					history.push("/match");
 				})
-				.catch((e) => {
-					console.log(e);
-				});
+				.catch((e) => {});
 		}
 		setStatus("נא בחר קובץ תמונה");
 	};
@@ -67,7 +66,12 @@ const Sign = ({ test }) => {
 	const handleSelectFile = async (e) => {
 		setFileToUpload(e.target.files[0]);
 	};
-	const handleUpload = () => {};
+
+	const years = [];
+	for (let i = year; i > year - 100; i--) {
+		years.push(i);
+	}
+
 	// -------------------jsx--------------------
 	return (
 		<div className="fsize">
@@ -92,6 +96,7 @@ const Sign = ({ test }) => {
 					<label className="custom-file-upload">
 						<input
 							type="file"
+							accept="image/*;capture=camera"
 							onChange={(e) => handleSelectFile(e)}
 							name="avatar"
 							id="avatar"
@@ -134,14 +139,30 @@ const Sign = ({ test }) => {
 						value={false}
 					/>
 
-					<label htmlFor="age">גיל</label>
-
-					<input
+					<label htmlFor="age">שנת לידה</label>
+					<select
+						name="cars"
+						id="cars"
+						onChange={(e) => setAge(year - e.target.value)}
+						type="number"
+						// name=""
+						// id="age"
+					>
+						<option value="volvo">{year}</option>
+						{years.map((year) => {
+							return (
+								<option key={year} value={year}>
+									{year}
+								</option>
+							);
+						})}
+					</select>
+					{/* <input
 						onChange={(e) => setAge(e.target.value)}
 						type="number"
 						name=""
 						id="age"
-					/>
+					/> */}
 					<label htmlFor="moreText">כמה מילים על עצמי</label>
 					<textarea
 						onChange={(e) => setMoreText(e.target.value)}
