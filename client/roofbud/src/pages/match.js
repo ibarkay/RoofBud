@@ -87,7 +87,7 @@ const Match = () => {
 					id="toDate"
 				/>
 				<br />
-				<div>
+				<div className="gender">
 					<label htmlFor="male">זכר</label>
 					<input
 						onClick={() => setGender(false)}

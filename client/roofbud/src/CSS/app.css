@@ -170,7 +170,7 @@ input[type="file"] {
 }
 .matches {
 	display: flex;
-
+	flex-direction: column;
 	justify-content: space-around;
 	align-items: center;
 }
@@ -187,7 +187,32 @@ input[type="file"] {
 	color: var(--blue);
 	font-weight: bold;
 	font-size: 2ch;
-	background: #f7963cce;
+	background: #395181;
+	color: var(--white);
+}
+.ui.card > .content > .description {
+	color: var(--white);
+}
+.ui.card > .content > a.header,
+.ui.cards > .card > .content > a.header,
+.ui.card .meta,
+.ui.cards > .card .meta,
+.ui.card > .extra a:not(.ui),
+.ui.cards > .card > .extra a:not(.ui),
+.ui.input,
+.ui.card > .extra,
+.ui.cards > .card > .extra {
+	color: var(--white);
+}
+.gender {
+	font-size: 2rem;
+	color: var(--white);
+}
+.fas.fa-envelope-open-text,
+.msg-count {
+	margin-left: 10px;
+	/* color: red; */
+	font-size: 1.5rem;
 }
 .buttons {
 	margin-bottom: 15px;

@@ -23,6 +23,7 @@ const Profile = () => {
 	const [toDate, setToDate] = useState("");
 	const [moreText, setMoreText] = useState("");
 	const [edit, setEdit] = useState(true);
+	const [isActive, setIsAvtive] = useState();
 	const [hidden, setHidden] = useState(true);
 	// -----------------------------------------
 	const handleSaveClick = async () => {
@@ -79,6 +80,24 @@ const Profile = () => {
 		}
 	};
 
+	const handleActive = async () => {
+		console.log(isActive);
+		await axios
+			.patch(
+				`${uri}/api/users/${user.userName}`,
+				{ isActive: !isActive },
+				{
+					headers: { Authorization: cookie.get("token") },
+				}
+			)
+			.then((res) => {
+				console.log(res);
+			})
+			.catch((e) => {
+				console.log(e.message);
+			});
+	};
+
 	// -----------useEffect----------------
 	useEffect(async () => {
 		await axios
@@ -87,6 +106,7 @@ const Profile = () => {
 			})
 			.then((res) => {
 				setUser(res.data);
+				setIsAvtive(user.isActive);
 			})
 			.catch((e) => {});
 	}, []);
@@ -165,22 +185,29 @@ const Profile = () => {
 								>
 									שמור שינויים
 								</button>
+								<br />
+								<button
+									onClick={() => handleActive()}
+									className={edit ? "hidden" : undefined}
+								>
+									{user.isActive ? "הפוך חשבון ללא פעיל" : "הפוך חשבון לפעיל"}
+								</button>
 							</div>
 						</div>
 					</div>
 					<div className="extra content">
-						<a>
+						<div>
 							<i
 								onClick={() => setHidden(!hidden)}
-								class="fas fa-envelope-open-text"
+								className="fas fa-envelope-open-text"
 							></i>
-							{user.msgs.length}
+							<span className="msg-count">{user.msgs.length}</span>
 							<div className={hidden ? "hidden" : "msgz"}>
 								{user.msgs.map((msg) => {
 									return <Msg m={msg} user={user} reRender={reRender} />;
 								})}
 							</div>
-						</a>
+						</div>
 					</div>
 				</div>
 				<h1 className="status">{status}</h1>

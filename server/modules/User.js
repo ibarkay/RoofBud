@@ -71,6 +71,10 @@ const userSchema = new mongoose.Schema({
 		type: Boolean,
 		required: true,
 	},
+	isActive: {
+		type: Boolean,
+		default: true,
+	},
 });
 // -------methods------------
 userSchema.pre("save", async function (next) {
