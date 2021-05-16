@@ -43,7 +43,7 @@ const Login = ({ test, callForRender }) => {
 	return (
 		<div className="iftach-container">
 			<div className="ui  center aligned container">
-				<div className="iftach-container">
+				<div className="match-win">
 					<label htmlFor="username">:שם משתמש</label>
 					<br />
 					<input
@@ -66,13 +66,13 @@ const Login = ({ test, callForRender }) => {
 					/>
 					<br />
 					<button className="btnLog" onClick={() => handleLogin()}>
-						התחבר
+						כניסה
 					</button>
 
 					<br />
-					<h1>{status}</h1>
 				</div>
 			</div>
+			<h1>{status}</h1>
 		</div>
 	);
 };
