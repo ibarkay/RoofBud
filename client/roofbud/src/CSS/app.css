@@ -9,6 +9,11 @@
 	font-family: myFirstFont;
 	src: url(../fonts/Bellefair-Regular.ttf);
 }
+/* .logo {
+	background: red;
+	width: 400px;
+	height: 100%;
+} */
 body {
 	font-family: myFirstFont;
 	height: 100vh;

@@ -6,6 +6,7 @@ const auth = require("./middleware/auth");
 const multer = require("multer");
 const sharp = require("sharp");
 const nodemailer = require("nodemailer");
+// -------------------------------------------
 
 app.use(express.static("public"));
 // -----file upload settings-----
@@ -26,13 +27,12 @@ const upload = multer({
 	},
 });
 // ------------------------------
-
+// ------------------------------
 app.use(cors());
 app.use(express.json());
 // ----------import modules----------------
 const User = require("./modules/User");
 const SendEmail = require("./modules/Email");
-
 // ----------END POINTS---------------
 
 // ? send msg
@@ -44,7 +44,6 @@ app.post("/api/send/msg", auth, async (req, res) => {
 		msg["from"] = req.body.from;
 		user.msgs = user.msgs.concat(msg);
 		user.save();
-		// !sending mail is possible now work here.
 		SendEmail.sendMail(
 			{
 				from: "7oofbud@gmail.com",

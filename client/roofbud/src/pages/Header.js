@@ -1,4 +1,5 @@
 import history from "../conf/creatHistory"; //!important without it - i cant use history and hashRouter.
+import { logo } from "../statics";
 // ------------------------------------
 
 import axios from "axios";
@@ -21,9 +22,7 @@ const Header = ({ test, isLogged, user }) => {
 				headers: { Authorization: cookie.get("token") },
 			})
 			.then(() => {})
-			.catch((e) => {
-				// console.log(e);
-			});
+			.catch((e) => {});
 		test();
 		history.push("/");
 	};
@@ -34,10 +33,13 @@ const Header = ({ test, isLogged, user }) => {
 			<div className="sticky">
 				<ul className="header">
 					<li>
-						<a href="/#/">R00fBud</a>
-					</li>
-					<li>
 						<a href="/#/login">כניסה</a>
+					</li>
+
+					<li>
+						<a href="/#/">
+							<img src={logo} alt="dsdasad" width="35px" />
+						</a>
 					</li>
 				</ul>
 			</div>
@@ -68,7 +70,9 @@ const Header = ({ test, isLogged, user }) => {
 						</a>
 					</li>
 					<li>
-						<a href="/#/">R00fBud</a>
+						<a href="/#/">
+							<img src={logo} alt="dsdasad" width="35px" />
+						</a>
 					</li>
 				</ul>
 			</div>
