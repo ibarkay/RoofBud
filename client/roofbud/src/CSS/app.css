@@ -26,6 +26,10 @@ body {
 	background-size: cover;
 }
 li {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
 	list-style-type: none;
 }
 a {
