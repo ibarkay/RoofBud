@@ -36,7 +36,7 @@ const Login = ({ test, callForRender }) => {
 				history.push("/profile");
 			})
 			.catch((e) => {
-				setStatus("שם מתשמש או ססמא שגויים");
+				setStatus("שם מתשמש או סיסמא שגויים");
 			});
 	};
 
@@ -57,7 +57,7 @@ const Login = ({ test, callForRender }) => {
 					/>
 
 					<br />
-					<label htmlFor="password">:ססמא</label>
+					<label htmlFor="password">:סיסמא</label>
 					<br />
 					<input
 						onChange={(e) => {
