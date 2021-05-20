@@ -1,8 +1,9 @@
-
+import { logo } from "../statics/index";
 const Home = () => {
 	return (
 		<div className="home-container">
-			<h1>R00fBud - התאמה מושלמת</h1>
+			<img src={logo} alt="" />
+			<h1>התאמה מושלמת</h1>
 			<a href="/#/sign">צור חשבון</a>
 		</div>
 	);

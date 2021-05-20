@@ -1,3 +1,4 @@
+import { logo } from "../statics";
 import { useState } from "react";
 import axios from "axios";
 import Cookies from "universal-cookie";
@@ -44,6 +45,8 @@ const Login = ({ test, callForRender }) => {
 		<div className="iftach-container">
 			<div className="ui  center aligned container">
 				<div className="match-win">
+					<img className="resize-logo" src={logo} alt="logo" />
+					<br />
 					<label htmlFor="username">:שם משתמש</label>
 					<br />
 					<input
@@ -65,7 +68,7 @@ const Login = ({ test, callForRender }) => {
 						id="password"
 					/>
 					<br />
-					<button className="btnLog" onClick={() => handleLogin()}>
+					<button className="space-btn wide" onClick={() => handleLogin()}>
 						כניסה
 					</button>
 

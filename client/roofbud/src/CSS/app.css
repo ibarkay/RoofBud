@@ -7,7 +7,7 @@
 }
 @font-face {
 	font-family: myFirstFont;
-	src: url(../fonts/Bellefair-Regular.ttf);
+	src: url(../fonts/Assistant-SemiBold.ttf);
 }
 /* .logo {
 	background: red;
@@ -125,6 +125,7 @@ input[type="file"] {
 	display: inline-block;
 	padding: 6px 12px;
 	cursor: pointer;
+	margin-top: 5px;
 }
 .iftach-container {
 	font-family: myFirstFont;
@@ -227,8 +228,11 @@ input[type="file"] {
 	font-size: 20px;
 }
 .gender {
-	font-size: 2rem;
+	font-size: 1.3rem;
 	color: var(--white);
+}
+.resize-logo {
+	width: 150px;
 }
 .fas.fa-envelope-open-text,
 .msg-count {
@@ -249,8 +253,20 @@ input[type="file"] {
 .ui.large.transparent.left.icon input {
 	text-align: right;
 }
+.space-btn {
+	margin-top: 5px;
+	font-weight: bold;
+	font-size: 1.2rem;
+}
 .right.floated.meta img {
 	margin-left: 5px;
+}
+.gender-block {
+	display: inline;
+	margin-bottom: 5px;
+}
+.wide {
+	width: 200px;
 }
 .sticky {
 	background: #395181ee;

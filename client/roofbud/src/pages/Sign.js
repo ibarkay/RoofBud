@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import Cookies from "universal-cookie";
 import history from "../conf/creatHistory";
+import { logo } from "../statics";
 
 // ------------uri config------------------------
 let uri = "";
@@ -77,7 +78,7 @@ const Sign = ({ test }) => {
 		<div className="fsize">
 			<div className="back-bg">
 				<div className="holder">
-					<h1>הרשמה</h1>
+					<img className="resize-logo" src={logo} alt="logo" />
 					<label htmlFor="username">שם משתמש</label>
 
 					<input
@@ -121,23 +122,28 @@ const Sign = ({ test }) => {
 						name=""
 						id="name"
 					/>
-
-					<label htmlFor="male">זכר</label>
-					<input
-						onChange={(e) => setGender(e.target.value)}
-						type="radio"
-						name="gender"
-						id="male"
-						value={true}
-					/>
-					<label htmlFor="female">נקבה</label>
-					<input
-						onChange={(e) => setGender(e.target.value)}
-						type="radio"
-						name="gender"
-						id="female"
-						value={false}
-					/>
+					<div className="gender-block">
+						<label className="gender-block" htmlFor="male">
+							זכר
+						</label>
+						<input
+							className="gender-block"
+							onChange={(e) => setGender(e.target.value)}
+							type="radio"
+							name="gender"
+							id="male"
+							value={true}
+						/>
+						<label htmlFor="female">נקבה</label>
+						<input
+							className="gender-block"
+							onChange={(e) => setGender(e.target.value)}
+							type="radio"
+							name="gender"
+							id="female"
+							value={false}
+						/>
+					</div>
 
 					<label htmlFor="age">שנת לידה</label>
 					<select
@@ -145,8 +151,6 @@ const Sign = ({ test }) => {
 						id="cars"
 						onChange={(e) => setAge(year - e.target.value)}
 						type="number"
-						// name=""
-						// id="age"
 					>
 						<option value="volvo">{year}</option>
 						{years.map((year) => {
@@ -168,8 +172,8 @@ const Sign = ({ test }) => {
 						onChange={(e) => setMoreText(e.target.value)}
 						name=""
 						id=""
-						cols="30"
-						rows="3"
+						cols="20"
+						rows="2"
 					></textarea>
 
 					<label
@@ -197,7 +201,9 @@ const Sign = ({ test }) => {
 						id=""
 					/>
 
-					<button onClick={() => handleSignIn()}>צור חשבון ומצא לי שותף</button>
+					<button className="space-btn" onClick={() => handleSignIn()}>
+						צור חשבון ומצא לי שותף
+					</button>
 					<p>{status}</p>
 				</div>
 			</div>
