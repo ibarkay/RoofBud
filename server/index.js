@@ -1,3 +1,4 @@
+// -------------external lib----------------------
 const express = require("express");
 const app = express();
 require("./modules/mongoose");
@@ -6,8 +7,7 @@ const auth = require("./middleware/auth");
 const multer = require("multer");
 const sharp = require("sharp");
 const nodemailer = require("nodemailer");
-// -------------------------------------------
-
+// ------------static setup---------------------
 app.use(express.static("public"));
 // -----file upload settings-----
 const upload = multer({
@@ -26,15 +26,15 @@ const upload = multer({
 		cb(undefined, true);
 	},
 });
-// ------------------------------
-// ------------------------------
+
+// -------app setup-------------
 app.use(cors());
 app.use(express.json());
 // ----------import modules----------------
 const User = require("./modules/User");
 const SendEmail = require("./modules/Email");
-// ----------END POINTS---------------
 
+// ----------END POINTS---------------
 // ? send msg
 app.post("/api/send/msg", auth, async (req, res) => {
 	try {
@@ -243,5 +243,7 @@ app.post("/api/logout", auth, async (req, res) => {
 
 // --------listener--------------
 app.listen(process.env.PORT || 1337, () => {
-	console.log("running on 1337");
+	console.log(
+		"   ▐▀▄      ▄▀▌   ▄▄▄▄▄▄▄             \n   ▌▒▒▀▄▄▄▄▀▒▒▐▄▀▀▒██▒██▒▀▀▄         \n  ▐▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▀▄        \n ▌▒▒▒▒▒▒▒▒▒▒▒▒▒▄▒▒▒▒▒▒▒▒▒▒▒▒▒▀▄     \n▀█▒▒█▌▒▒█▒▒▐█▒▒▀▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▌    \n▀▌▒▒▒▒▒▀▒▀▒▒▒▒▒▀▀▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▐  ▄▄\n▐▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▌▄█▒█\n▐▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▐▒█▀ \n▐▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▐▀  \n▐▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▌    \n▌▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▐     \n▐▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▌     \n ▌▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▐      \n ▐▄▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▄▌      \n   ▀▄▄▀▀▀▀▄▄▀▀▀▀▀▀▄▄▀▀▀▀▀▀▄▄▀       \n \n"
+	);
 });

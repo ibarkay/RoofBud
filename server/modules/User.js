@@ -1,8 +1,11 @@
+// ---------external libs---------------
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const validator = require("validator");
+// ----------ENV---------------
 const { SECRET } = require("../config/KEY");
+
 // ----------Schema------------------
 const userSchema = new mongoose.Schema({
 	userName: {
@@ -77,6 +80,7 @@ const userSchema = new mongoose.Schema({
 	},
 });
 // -------methods------------
+// ?before saving data to DB - manipulate.
 userSchema.pre("save", async function (next) {
 	const user = this;
 	if (user.isModified("password")) {
@@ -90,7 +94,7 @@ userSchema.pre("save", async function (next) {
 	}
 	next();
 });
-
+// ?Credz hunting
 userSchema.statics.findByCreds = async (userName, password) => {
 	const user = await User.findOne({ userName: userName });
 	if (!user) {
@@ -102,7 +106,7 @@ userSchema.statics.findByCreds = async (userName, password) => {
 	}
 	return user;
 };
-
+//? token giveaway
 userSchema.methods.generateAuthToken = async function () {
 	const user = this;
 	const token = jwt.sign({ userName: user.userName }, `${SECRET}`);
@@ -110,7 +114,7 @@ userSchema.methods.generateAuthToken = async function () {
 	await user.save();
 	return token;
 };
-
+// ?dont send sensitive
 userSchema.methods.toJSON = function () {
 	const user = this;
 	const userObject = user.toObject();

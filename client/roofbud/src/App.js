@@ -5,17 +5,18 @@ import axios from "axios";
 import Cookies from "universal-cookie";
 import { useState, useEffect } from "react";
 
-// ------------------------------------
+// ----------pages import-------------------
 
 import Login from "./pages/Login";
 import Sign from "./pages/Sign";
 import Profile from "./pages/Profile";
 import Match from "./pages/match";
 import Home from "./pages/Home";
+// ----------CSS-------------------
 import "./CSS/app.css";
-// -----------------------------------
+// ---------------Cookie init--------------------
 const cookie = new Cookies();
-// ------------------------------------
+// ------------url conf-------------------
 let uri = "";
 if (process.env.NODE_ENV === "production") {
 	uri = process.env.PUBLIC_URL;

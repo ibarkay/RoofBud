@@ -46,7 +46,6 @@ const Profile = ({ callForRender }) => {
 				}
 			)
 			.then((res) => {
-				// console.log("ok changed");
 				setRender(render + 1);
 			})
 			.catch((e) => {

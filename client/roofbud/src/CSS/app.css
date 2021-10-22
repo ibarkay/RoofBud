@@ -9,11 +9,7 @@
 	font-family: myFirstFont;
 	src: url(../fonts/Assistant-SemiBold.ttf);
 }
-/* .logo {
-	background: red;
-	width: 400px;
-	height: 100%;
-} */
+
 body {
 	font-family: myFirstFont;
 	height: 100vh;

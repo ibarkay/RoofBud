@@ -105,8 +105,7 @@ const Sign = ({ test }) => {
 						העלה תמונה
 					</label>
 
-					<label htmlFor="password">ססמא</label>
-
+					<label htmlFor="password">סיסמא</label>
 					<input
 						onChange={(e) => setPassword(e.target.value)}
 						type="password"
@@ -161,12 +160,6 @@ const Sign = ({ test }) => {
 							);
 						})}
 					</select>
-					{/* <input
-						onChange={(e) => setAge(e.target.value)}
-						type="number"
-						name=""
-						id="age"
-					/> */}
 					<label htmlFor="moreText">כמה מילים על עצמי</label>
 					<textarea
 						onChange={(e) => setMoreText(e.target.value)}
